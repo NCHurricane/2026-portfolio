@@ -1,0 +1,24 @@
+RewriteEngine On
+RewriteBase /
+
+# 1. Custom 404 Page (Astro generates this as 404.html)
+ErrorDocument 404 /404.html
+
+# 2. Redirect Old Pages to New Sections
+Redirect 301 /index.html /
+Redirect 301 /video.html /work
+Redirect 301 /photo.html /work
+Redirect 301 /about.html /about
+Redirect 301 /social.html /about
+
+# 3. Redirect the Cat Section to the New Domain
+# This catches /nchurricats AND anything after it (e.g. /nchurricats/stormy)
+Redirect 301 /nchurricats https://nchurricats.com
+
+# 4. Standard Astro/Clean URL Handling
+# If the user requests a folder (like /work), serve the index.html inside it
+DirectoryIndex index.html
+
+# Optional: Force HTTPS (If you haven't done this elsewhere)
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

@@ -1,0 +1,62 @@
+---
+// src/pages/404.astro
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Page Not Found | Chuck Copeland">
+    <div class="error-container container">
+        <h1 class="text-accent">404</h1>
+        <h2>Page Not Found</h2>
+        <p class="text-muted">The page you are looking for has been moved or deleted.</p>
+        
+        <div class="actions">
+            <a href="/" class="btn-primary">Back to Home</a>
+            <a href="/work" class="link-secondary">View Work &rarr;</a>
+        </div>
+    </div>
+</Layout>
+
+<style>
+    .error-container {
+        height: 80vh; /* Takes up most of the screen */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 8rem;
+        line-height: 1;
+        margin-bottom: 0;
+        opacity: 0.8;
+    }
+
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        margin-bottom: 3rem;
+        font-size: 1.1rem;
+    }
+
+    .actions {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    .link-secondary {
+        color: var(--text-main);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .link-secondary:hover {
+        color: var(--accent);
+    }
+</style>

@@ -1,0 +1,62 @@
+[
+    {
+        "id": "2024-showreel",
+        "title": "2024 Showreel",
+        "thumbnail": "assets/video/gallery/thumbs/2024-showreel.webp",
+        "description": "A showcase of my past projects, featuring motion graphics, color grading, and visual effects.",
+        "videoUrl": "https://www.youtube-nocookie.com/embed/DSBbFccIL5I?rel=0&modestbranding=1",
+        "date": "2024-04-19",
+        "client": "ChuckCopeland.com",
+        "category": "Motion Graphics"
+    },
+    {
+        "id": "360-storm",
+        "title": "Thunderstorm 360 Time Lapse",
+        "thumbnail": "assets/video/gallery/thumbs/20210801-360-storm.jpg",
+        "description": "Time-lapse of a severe thunderstorm, captured with the Insta360 One X2.",
+        "videoUrl": "/assets/video/gallery/20210801-360-storm.mp4",
+        "date": "2021-08-01",
+        "client": "NCHurricane.com",
+        "category": "Video"
+    },
+    {
+        "id": "farming-drone",
+        "title": "Autumn Harvest",
+        "thumbnail": "assets/video/gallery/thumbs/farming-drone.webp",
+        "description": "I Took my DJI Mini 3 Pro drone to a farm in eastern North Carolina.",
+        "videoUrl": "https://www.youtube-nocookie.com/embed/2AumlJD8sWc?rel=0&modestbranding=1",
+        "date": "2023-10-29",
+        "client": "ChuckCopeland.com",
+        "category": "Drone"
+    },
+    {
+        "id": "crosspointe-15",
+        "title": "Crosspointe 15th Anniversary",
+        "thumbnail": "assets/video/gallery/thumbs/crosspointe-15.webp",
+        "description": "A video celebrating the 15th anniversary of Crosspointe Church.",
+        "videoUrl": "https://www.youtube-nocookie.com/embed/TGDquR-XKbs?rel=0&modestbranding=1",
+        "date": "2024-7-12",
+        "client": "Crosspointe Church",
+        "category": "Video Editing"
+    },
+    {
+        "id": "2023-fall-enc",
+        "title": "Autumn in Eastern NC",
+        "thumbnail": "assets/video/gallery/thumbs/2023-fall-enc.png",
+        "description": "Drone footage from Bertie County, NC of fall colors surrounding a cotton field.",
+        "videoUrl": "/assets/video/gallery/20231030-fall-in-enc_converted.mp4",
+        "date": "2024-7-12",
+        "client": "ChuckCopeland.com",
+        "category": "Drone"
+    },
+    {
+        "id": "kinetic-earnhardt",
+        "title": "Kinetic Typography Earnhardt",
+        "thumbnail": "assets/video/gallery/thumbs/20220114-kinetic-earnhardt.webp",
+        "description": "Remembering Dale Earnhardt's last win.",
+        "videoUrl": "/assets/video/gallery/20220112_kinetic_earnhardt.mp4",
+        "date": "2022-01-14",
+        "client": "Personal",
+        "category": "Motion Graphics"
+    }
+]

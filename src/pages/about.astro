@@ -1,0 +1,232 @@
+---
+// src/pages/about.astro
+import Layout from '../layouts/Layout.astro';
+
+// You can move these to a JSON file later if you want, but inline is fine for now
+const skills = [
+    {
+        icon: "fa-solid fa-film",
+        title: "Video & Motion",
+        desc: "Davinci Resolve Studio & After Effects. From short-form social content to long-form corporate storytelling."
+    },
+    {
+        icon: "fa-solid fa-camera",
+        title: "Photography",
+        desc: "Event photography, landscapes, and branding. Expert in Lightroom color grading and composition."
+    },
+    {
+        icon: "fa-solid fa-laptop-code",
+        title: "Web Development",
+        desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for small businesses."
+    }
+];
+
+const clients = [
+    { name: "Crosspointe Church", img: "/assets/img/crosspointe.png" },
+    { name: "Walmart", img: "/assets/img/walmart-logo.png" }, // Note: You might need to find a generic Walmart logo if you don't have one
+    { name: "BDO", img: "/assets/img/bdologo.png" },
+    { name: "Lisa Evans", img: "/assets/img/lisaevans.png" }
+];
+---
+
+<Layout title="About Chuck Copeland">
+    
+    <div class="about-page">
+        
+        <section class="bio-header container">
+            <div class="bio-content">
+                <h1>More Than Just <br /><span class="text-accent">Pixels</span></h1>
+                <p class="lead">Cats, Clouds, Cars, and Code.</p>
+                <div class="bio-text">
+                    <p>I'm Chuck Copeland, a multimedia content specialist with over 20 years of freelance experience. For 30 years, I led successful teams at companies like Walmart and Harbor Freight Tools. My passion for storytelling led me to build a second career creating content for businesses and my own niche communities.</p>
+                    <p>I run several social media accounts focusing on everything from hurricane awareness to motorsports. My greatest days are when I can help someone, make them smile, or tell a story that matters.</p>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/chuckcopeland" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/chuck_copeland/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@chuckcopeland" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://x.com/chuckcopelandwx" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                </div>
+            </div>
+            
+            <div class="bio-image">
+                <img src="/assets/img/about-photo.webp" alt="Chuck Copeland" />
+            </div>
+        </section>
+
+        <section class="skills-section">
+            <div class="container">
+                <h2>Capabilities</h2>
+                <div class="skills-grid">
+                    {skills.map(skill => (
+                        <div class="skill-card">
+                            <i class={`${skill.icon} icon`}></i>
+                            <h3>{skill.title}</h3>
+                            <p class="text-muted">{skill.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <section class="clients-section container">
+            <div class="section-header">
+                <h2>Trusted By</h2>
+            </div>
+            <div class="client-logos">
+                {clients.map(client => (
+                    <div class="client-logo">
+                        <img src={client.img} alt={client.name} loading="lazy" />
+                    </div>
+                ))}
+            </div>
+        </section>
+
+    </div>
+
+</Layout>
+
+<style>
+    .about-page {
+        padding-top: 8rem;
+    }
+
+    /* BIO SECTION */
+    .bio-header {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4rem;
+        align-items: center;
+        margin-bottom: 8rem;
+    }
+
+    @media (min-width: 992px) {
+        .bio-header {
+            grid-template-columns: 1.2fr 0.8fr;
+        }
+    }
+
+    h1 {
+        font-size: 3.5rem;
+        line-height: 1.1;
+        margin-bottom: 1rem;
+    }
+
+    .lead {
+        font-size: 1.5rem;
+        color: var(--text-muted);
+        font-family: var(--font-heading);
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .bio-text p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #ccc;
+        margin-bottom: 1.5rem;
+        max-width: 60ch;
+    }
+
+    .bio-image {
+        position: relative;
+    }
+
+    .bio-image img {
+        width: 100%;
+        border-radius: 12px;
+        filter: grayscale(100%); /* Cinematic B&W look */
+        transition: filter 0.5s ease;
+        box-shadow: 20px 20px 0 var(--bg-card); /* Simple graphic shadow */
+    }
+
+    .bio-image:hover img {
+        filter: grayscale(0%); /* Color on hover */
+    }
+
+    /* SOCIAL LINKS */
+    .social-links {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .social-links a {
+        font-size: 1.5rem;
+        color: var(--text-muted);
+        transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .social-links a:hover {
+        color: var(--accent);
+        transform: translateY(-3px);
+    }
+
+    /* SKILLS */
+    .skills-section {
+        background: var(--bg-card);
+        padding: 6rem 0;
+        margin-bottom: 6rem;
+    }
+
+    .skills-section h2 {
+        text-align: center;
+        margin-bottom: 4rem;
+        font-size: 2.5rem;
+    }
+
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+    }
+
+    .skill-card {
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .icon {
+        font-size: 3rem;
+        color: var(--accent);
+        margin-bottom: 1.5rem;
+    }
+
+    .skill-card h3 {
+        margin-bottom: 1rem;
+    }
+
+    /* CLIENTS */
+    .clients-section {
+        margin-bottom: 8rem;
+    }
+
+    .section-header {
+        border-bottom: 1px solid #222;
+        padding-bottom: 1rem;
+        margin-bottom: 3rem;
+    }
+
+    .client-logos {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 3rem;
+    }
+
+    .client-logo img {
+        max-height: 60px;
+        max-width: 200px;
+        opacity: 0.5;
+        filter: grayscale(100%);
+        transition: all 0.3s ease;
+    }
+
+    .client-logo:hover img {
+        opacity: 1;
+        filter: grayscale(0%);
+    }
+</style>

@@ -1,0 +1,31 @@
+---
+// src/layouts/Layout.astro
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import '@fontsource/oswald';
+import '@fontsource/inter';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Chuck Copeland - Multimedia Artist & Video Editor" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+		<meta name="description" content={description} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<Navbar />
+		<slot /> <footer style="border-top: 1px solid #222; padding: 4rem 0; text-align: center; margin-top: 4rem;">
+            <p class="text-muted" style="font-size: 0.9rem;">&copy; {new Date().getFullYear()} Chuck Copeland. All Rights Reserved.</p>
+        </footer>
+	</body>
+</html>

@@ -1,0 +1,215 @@
+---
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
+import projects from '../data/projects.json';
+
+// We explicitly select the 4 best projects for the homepage grid
+// This ensures your strongest work is always front and center
+const featuredIds = ['2024-showreel', 'crosspointe-15', 'farming-drone', '2023-fall-enc'];
+const featuredProjects = projects.filter(p => featuredIds.includes(p.id));
+---
+
+<Layout title="Chuck Copeland | Multimedia Specialist">
+    
+    <section class="hero">
+        <video autoplay muted loop playsinline class="hero-video" poster="/assets/img/hero-fallback.webp">
+            <source src="/assets/video/hero.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content container">
+            <h1>Visual Storytelling <br /> <span class="text-accent">Redefined</span></h1>
+            <p class="hero-subtitle">Video Editing &bull; Motion Graphics &bull; Photography</p>
+            <div class="hero-actions">
+                <a href="/work" class="btn-primary">View Selected Work</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Selected Projects</h2>
+                <a href="/work" class="view-all">View Full Index &rarr;</a>
+            </div>
+
+            <div class="bento-grid">
+                {featuredProjects.map((project, index) => (
+                    <a href={`/work/${project.id}`} class={`grid-item item-${index}`}>
+                        <div class="card-image">
+                            <img src={`/${project.thumbnail}`} alt={project.title} loading="lazy" />
+                            <div class="play-icon">
+                                <svg width="50" height="50" viewBox="0 0 24 24" fill="white">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>{project.title}</h3>
+                            <p class="text-muted">{project.category} &bull; {project.client}</p>
+                        </div>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </section>
+
+</Layout>
+
+<style>
+    /* HERO STYLES */
+    .hero {
+        position: relative;
+        height: 90vh;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+    }
+
+    .hero-video {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        object-fit: cover;
+        z-index: 0;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.3), #0a0a0a);
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        margin-top: 5rem;
+    }
+
+    h1 {
+        font-size: clamp(3rem, 8vw, 6rem); /* Responsive font size */
+        line-height: 1;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+        color: var(--text-muted);
+        margin-bottom: 2.5rem;
+        font-family: var(--font-body);
+    }
+
+    /* GRID STYLES */
+    .featured-section {
+        padding: 5rem 0;
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid #222;
+        padding-bottom: 1rem;
+    }
+
+    .view-all {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+
+    .view-all:hover {
+        color: var(--accent);
+    }
+
+    .bento-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    /* Desktop Grid Layout */
+    @media (min-width: 768px) {
+        .bento-grid {
+            grid-template-columns: repeat(12, 1fr);
+            auto-rows: 300px;
+        }
+        
+        /* Layout Logic: 
+           Item 0 (Showreel) = Big (8 cols)
+           Item 1 = Small (4 cols)
+           Item 2 = Small (4 cols)
+           Item 3 = Big (8 cols) 
+        */
+        .item-0 { grid-column: span 8; }
+        .item-1 { grid-column: span 4; }
+        .item-2 { grid-column: span 4; }
+        .item-3 { grid-column: span 8; }
+    }
+
+    .grid-item {
+        position: relative;
+        background: var(--bg-card);
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+        height: 100%;
+        min-height: 300px; /* Ensure height on mobile */
+    }
+
+    .grid-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .card-image {
+        flex: 1;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .grid-item:hover .card-image img {
+        transform: scale(1.05);
+    }
+
+    .play-icon {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0,0,0,0.5);
+        border-radius: 50%;
+        width: 60px; height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        backdrop-filter: blur(5px);
+    }
+
+    .grid-item:hover .play-icon {
+        opacity: 1;
+    }
+
+    .card-info {
+        padding: 1.5rem;
+        background: var(--bg-card);
+        z-index: 2;
+        border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .card-info h3 { font-size: 1.2rem; color: var(--text-main); margin-bottom: 0.25rem; }
+    .card-info p { font-size: 0.8rem; margin: 0; text-transform: uppercase; letter-spacing: 1px;}
+</style>

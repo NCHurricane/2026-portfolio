@@ -1,0 +1,47 @@
+# Build Output (Never commit these)
+dist/
+.astro/
+node_modules/
+
+# Environment Variables
+.env
+.env.production
+.env.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS System Files
+.DS_Store
+Thumbs.db
+
+# Large Media Files (Keep the folder structure, ignore the files)
+# Ignore specific video formats everywhere
+*.mp4
+*.mov
+*.webm
+*.avi
+*.mkv
+
+# Ignore high-res raw photos if you have them (optional)
+*.psd
+*.ai
+*.tiff
+*.CR2
+*.NEF
+
+# Ignore Design Source Files (Keep repo light)
+*.psd
+*.ai
+*.indd
+*.ae  # After Effects project files
+*.prproj # Premiere Pro project files
+*.tiff
+*.raw
+
+# If you specifically want to ignore the whole video folder contents:
+public/assets/video/*
+!public/assets/video/.gitkeep

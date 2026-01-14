@@ -30,7 +30,7 @@ const clients = [
 			<span class="text-accent">
 				<h2>Digital Creator</h2>
 			</span>
-			<h3 class="hero-subtitle">Video Editing &bull; Motion Graphics &bull; Photography</h3>
+			<h3 class="hero-subtitle">Video Editing &bull; Motion Graphics &bull; Web Development &bull; CatDad</h3>
 			<div class="hero-actions">
 				<a href="#video" class="btn-primary">View Featured Projects</a>
 			</div>
@@ -141,7 +141,7 @@ const clients = [
 	/* HERO STYLES (Unchanged) */
 	.hero {
 		position: relative;
-		height: 90vh;
+		height: 95vh;
 		width: 100%;
 		overflow: hidden;
 		display: flex;
@@ -354,6 +354,14 @@ const clients = [
 	.client-logo:hover img {
 		opacity: 1;
 		filter: grayscale(0%);
+	}
+
+	.client-logo {
+		transition: transform 0.3s ease;
+	}
+
+	.client-logo:hover {
+		transform: translateY(-5px) scale(1.05);
 	}
 
 	.services-teaser {

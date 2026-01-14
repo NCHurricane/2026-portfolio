@@ -82,9 +82,9 @@ p {
 
 .hero-content h1 {
     /* Standard header for sub-pages (About, Photos, etc) */
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Georama', sans-serif;
     font-weight: 800;
-    ;
+    font-style: italic;
 }
 
 .page-header {

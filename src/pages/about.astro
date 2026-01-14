@@ -60,7 +60,7 @@ const clients = [
             </div>
 
             <div class="bio-image">
-                <img src="/assets/img/about-photo.webp" alt="Chuck Copeland" />
+                <img src="/assets/img/about-photo.webp" alt="Chuck Copeland" loading="lazy" />
             </div>
         </section>
 
@@ -148,6 +148,8 @@ const clients = [
 
     .bio-image img {
         width: 100%;
+        max-width: 500px;
+        height: auto;
         border-radius: 12px;
         filter: grayscale(100%);
         transition: filter 0.5s ease;
@@ -173,7 +175,7 @@ const clients = [
 
     .social-links a:hover {
         color: var(--accent);
-        transform: translateY(-3px);
+        transform: translateY(-3px) scale(1.5);
     }
 
     /* SKILLS */

@@ -12,7 +12,7 @@ This repository contains the source code for the personal portfolio website buil
 
 The purpose of this project is to create a portfolio website to display samples of my work for potential clients and the general public.
 
-**Live Demo:** https://chuckcopeland.com
+
 
 ### Key Features
 

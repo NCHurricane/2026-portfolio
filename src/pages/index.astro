@@ -1,215 +1,429 @@
 ---
 // src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
-import projects from '../data/projects.json';
+import projects from '../data/videos.json';
+import photos from '../data/photos.json';
 
-// We explicitly select the 4 best projects for the homepage grid
-// This ensures your strongest work is always front and center
-const featuredIds = ['2024-showreel', 'crosspointe-15', 'farming-drone', '2023-fall-enc'];
+// Select Top 3 Videos & Photos
+const featuredIds = ['2024-showreel', 'crosspointe-15', 'farming-drone'];
 const featuredProjects = projects.filter(p => featuredIds.includes(p.id));
+const featuredPhotos = photos.slice(0, 3);
+
+// Client List (Social Proof)
+const clients = [
+{ name: "Crosspointe Church", img: "/assets/img/crosspointe.png" },
+{ name: "Lisa Evans", img: "/assets/img/lisaevans.png" },
+{ name: "BDO", img: "/assets/img/bdologo.png" },
+{ name: "RBS Rentals", img: "/assets/img/rbsrentals.png" }
+];
 ---
 
 <Layout title="Chuck Copeland | Multimedia Specialist">
-    
-    <section class="hero">
-        <video autoplay muted loop playsinline class="hero-video" poster="/assets/img/hero-fallback.webp">
-            <source src="/assets/video/hero.mp4" type="video/mp4" />
-        </video>
-        <div class="hero-overlay"></div>
-        
-        <div class="hero-content container">
-            <h1>Visual Storytelling <br /> <span class="text-accent">Redefined</span></h1>
-            <p class="hero-subtitle">Video Editing &bull; Motion Graphics &bull; Photography</p>
-            <div class="hero-actions">
-                <a href="/work" class="btn-primary">View Selected Work</a>
-            </div>
-        </div>
-    </section>
 
-    <section class="featured-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Selected Projects</h2>
-                <a href="/work" class="view-all">View Full Index &rarr;</a>
-            </div>
+	<section class="hero">
+		<video autoplay muted loop playsinline class="hero-video" poster="/assets/img/hero-fallback.webp">
+			<source src="/assets/video/hero.mp4" type="video/mp4" />
+		</video>
+		<div class="hero-overlay"></div>
+		<div class="hero-content container">
+			<h1>Chuck Copeland</h1>
+			<span class="text-accent">
+				<h2>Digital Creator</h2>
+			</span>
+			<h3 class="hero-subtitle">Video Editing &bull; Motion Graphics &bull; Photography</h3>
+			<div class="hero-actions">
+				<a href="#video" class="btn-primary">View Featured Projects</a>
+			</div>
+		</div>
+	</section>
 
-            <div class="bento-grid">
-                {featuredProjects.map((project, index) => (
-                    <a href={`/work/${project.id}`} class={`grid-item item-${index}`}>
-                        <div class="card-image">
-                            <img src={`/${project.thumbnail}`} alt={project.title} loading="lazy" />
-                            <div class="play-icon">
-                                <svg width="50" height="50" viewBox="0 0 24 24" fill="white">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card-info">
-                            <h3>{project.title}</h3>
-                            <p class="text-muted">{project.category} &bull; {project.client}</p>
-                        </div>
-                    </a>
-                ))}
-            </div>
-        </div>
-    </section>
+	<section class="trusted-section reveal">
+		<div class="container">
+			<p class="trusted-label">Current and Past Clients</p>
+			<div class="client-logos">
+				{clients.map(client => (
+				<div class="client-logo">
+					<img src={client.img} alt={client.name} loading="lazy" />
+				</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section id="video" class="featured-section reveal">
+		<div class="container">
+			<div class="section-header">
+				<h2>Featured Videos</h2>
+				<a href="/videos" class="view-all">View All Videos</a>
+			</div>
+			<div class="media-grid">
+				{featuredProjects.map((project) => (
+				<a href={`/video/${project.id}`} class="media-card">
+					<div class="card-image">
+						<img src={`/${project.thumbnail}`} alt={project.title} loading="lazy" />
+						<div class="play-icon"><i class="fas fa-play"></i></div>
+					</div>
+					<div class="card-info">
+						<h3>{project.title}</h3>
+						<p class="text-muted">{project.category}</p>
+					</div>
+				</a>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section id="photo" class="featured-section reveal">
+		<div class="container">
+			<div class="section-header">
+				<h2>Featured Photos</h2>
+				<a href="/photos" class="view-all">View Gallery</a>
+			</div>
+			<div class="media-grid">
+				{featuredPhotos.map((photo) => (
+				<a href={photo.full} class="media-card lightbox-trigger" title={photo.title}>
+					<div class="card-image">
+						<img src={photo.thumb} alt={photo.title} loading="lazy" />
+						<div class="photo-icon"><i class="fas fa-expand"></i></div>
+					</div>
+					<div class="card-info">
+						<h3>{photo.title}</h3>
+						<p class="text-muted">{photo.category}</p>
+					</div>
+				</a>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="services-teaser reveal">
+		<div class="container">
+			<div class="section-header">
+				<h2>Capabilities</h2>
+				<a href="/about" class="view-all">More About Me</a>
+			</div>
+			<div class="grid-3">
+				<div class="service-item">
+					<i class="fas fa-film text-accent service-icon"></i>
+					<h3>Post-Production</h3>
+					<p class="text-muted text-sm">Davinci Resolve Studio workflow including advanced color grading,
+						motion graphics, and sound design.</p>
+				</div>
+				<div class="service-item">
+					<i class="fas fa-paper-plane text-accent service-icon"></i>
+					<h3>Aerial Cinematography</h3>
+					<p class="text-muted text-sm">FAA Part 107 Certified Drone Pilot capturing unique perspectives for
+						real estate, events, and inspection.</p>
+				</div>
+				<div class="service-item">
+					<i class="fas fa-code text-accent service-icon"></i>
+					<h3>Web Development</h3>
+					<p class="text-muted text-sm">Modern responsive websites built with Astro, Tailwind, and PHP for
+						speed and performance.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="cta-banner">
+		<div class="container text-center">
+			<h2 class="mb-4">Have a project in mind?</h2>
+			<p class="text-muted mb-8 max-w-2xl mx-auto">From concept to final cut, I help brands and businesses tell
+				their story through compelling visuals.</p>
+			<a href="#" class="btn-primary contact-trigger">Let's Work Together</a>
+		</div>
+	</section>
 
 </Layout>
 
 <style>
-    /* HERO STYLES */
-    .hero {
-        position: relative;
-        height: 90vh;
-        width: 100%;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-    }
+	/* HERO STYLES (Unchanged) */
+	.hero {
+		position: relative;
+		height: 90vh;
+		width: 100%;
+		overflow: hidden;
+		display: flex;
+		align-items: center;
+	}
 
-    .hero-video {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        object-fit: cover;
-        z-index: 0;
-    }
+	.hero-video {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		z-index: 0;
+	}
 
-    .hero-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.3), #0a0a0a);
-        z-index: 1;
-    }
+	.hero-overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), #0a0a0a);
+		z-index: 1;
+	}
 
-    .hero-content {
-        position: relative;
-        z-index: 2;
-        margin-top: 5rem;
-    }
+	.hero-content {
+		position: relative;
+		z-index: 2;
+		margin-top: 5rem;
+		text-align: center;
+		width: 100%;
+	}
 
-    h1 {
-        font-size: clamp(3rem, 8vw, 6rem); /* Responsive font size */
-        line-height: 1;
-        margin-bottom: 1.5rem;
-    }
+	.hero-subtitle {
+		font-size: clamp(0.9rem, 1vw + 0.5rem, 1.4rem);
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		line-height: 1.6;
+		font-weight: 300;
+		opacity: 0.8;
+		max-width: 800px;
+		margin: 1rem auto 2rem;
+	}
 
-    .hero-subtitle {
-        font-size: 1.25rem;
-        color: var(--text-muted);
-        margin-bottom: 2.5rem;
-        font-family: var(--font-body);
-    }
+	/* SECTIONS */
+	.featured-section {
+		padding: 4rem 0;
+	}
 
-    /* GRID STYLES */
-    .featured-section {
-        padding: 5rem 0;
-    }
+	.section-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: end;
+		margin-bottom: 2rem;
+		border-bottom: 1px solid #222;
+		padding-bottom: 1rem;
+	}
 
-    .section-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: end;
-        margin-bottom: 2rem;
-        border-bottom: 1px solid #222;
-        padding-bottom: 1rem;
-    }
+	.view-all {
+		color: var(--text-muted);
+		font-size: 0.9rem;
+	}
 
-    .view-all {
-        color: var(--text-muted);
-        font-size: 0.9rem;
-    }
+	.view-all:hover {
+		color: var(--accent);
+	}
 
-    .view-all:hover {
-        color: var(--accent);
-    }
+	/* --- THE NEW 16:9 UNIFORM GRID --- */
+	.media-grid {
+		display: grid;
+		/* Mobile: 1 column */
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
 
-    .bento-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
+	@media (min-width: 768px) {
+		.media-grid {
+			/* Tablet/Desktop: Fit as many 400px cards as possible */
+			grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+		}
+	}
 
-    /* Desktop Grid Layout */
-    @media (min-width: 768px) {
-        .bento-grid {
-            grid-template-columns: repeat(12, 1fr);
-            auto-rows: 300px;
-        }
-        
-        /* Layout Logic: 
-           Item 0 (Showreel) = Big (8 cols)
-           Item 1 = Small (4 cols)
-           Item 2 = Small (4 cols)
-           Item 3 = Big (8 cols) 
-        */
-        .item-0 { grid-column: span 8; }
-        .item-1 { grid-column: span 4; }
-        .item-2 { grid-column: span 4; }
-        .item-3 { grid-column: span 8; }
-    }
+	.media-card {
+		display: block;
+		position: relative;
+		background: var(--bg-card);
+		border-radius: 8px;
+		overflow: hidden;
+		transition: transform 0.3s ease;
 
-    .grid-item {
-        position: relative;
-        background: var(--bg-card);
-        border-radius: 8px;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        text-decoration: none;
-        transition: transform 0.3s ease;
-        height: 100%;
-        min-height: 300px; /* Ensure height on mobile */
-    }
+		/* THIS FORCES THE 16:9 RATIO ON THE WHOLE CARD CONTAINER */
+		/* Note: We actually apply aspect ratio to the image container 
+           to ensure the text sits below it nicely */
+	}
 
-    .grid-item:hover {
-        transform: translateY(-5px);
-    }
+	.media-card:hover {
+		transform: translateY(-5px);
+	}
 
-    .card-image {
-        flex: 1;
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-    }
+	.card-image {
+		position: relative;
+		width: 100%;
 
-    .card-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-    }
+		/* THE MAGIC RATIO: */
+		aspect-ratio: 16 / 9;
 
-    .grid-item:hover .card-image img {
-        transform: scale(1.05);
-    }
+		overflow: hidden;
+	}
 
-    .play-icon {
-        position: absolute;
-        top: 50%; left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(0,0,0,0.5);
-        border-radius: 50%;
-        width: 60px; height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        backdrop-filter: blur(5px);
-    }
+	.card-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		/* This crops the photos to fill the 16:9 box */
+		transition: transform 0.5s ease;
+	}
 
-    .grid-item:hover .play-icon {
-        opacity: 1;
-    }
+	.media-card:hover .card-image img {
+		transform: scale(1.05);
+	}
 
-    .card-info {
-        padding: 1.5rem;
-        background: var(--bg-card);
-        z-index: 2;
-        border-top: 1px solid rgba(255,255,255,0.05);
-    }
-    
-    .card-info h3 { font-size: 1.2rem; color: var(--text-main); margin-bottom: 0.25rem; }
-    .card-info p { font-size: 0.8rem; margin: 0; text-transform: uppercase; letter-spacing: 1px;}
+	/* ICONS (Play for Video, Expand for Photo) */
+	.play-icon,
+	.photo-icon {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: rgba(0, 0, 0, 0.6);
+		border-radius: 50%;
+		width: 50px;
+		height: 50px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+		backdrop-filter: blur(4px);
+		color: #fff;
+	}
+
+	.media-card:hover .play-icon,
+	.media-card:hover .photo-icon {
+		opacity: 1;
+	}
+
+	.card-info {
+		padding: 1.2rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+	}
+
+	.card-info h3 {
+		font-size: 1.1rem;
+		color: var(--text-main);
+		margin-bottom: 0.25rem;
+	}
+
+	.card-info p {
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	/* NEW STYLES */
+	.trusted-section {
+		padding: 2.5rem 0;
+		background: #0f0f0f;
+		/* Slightly lighter than main bg */
+		border-bottom: 1px solid #222;
+		text-align: center;
+	}
+
+	.trusted-label {
+		font-size: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		color: #555;
+		margin-bottom: 1.5rem;
+		font-family: var(--font-heading);
+	}
+
+	.logo-grid {
+		display: flex;
+		justify-content: center;
+		gap: 2rem;
+		flex-wrap: wrap;
+	}
+
+	.client-logos {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	.client-logo img {
+		max-height: 75px;
+		max-width: 200px;
+		opacity: 0.5;
+		filter: grayscale(100%);
+		transition: all 0.3s ease;
+	}
+
+	@media (max-width: 768px) {
+		.client-logo img {
+			max-height: 50px;
+			max-width: 200px;
+		}
+	}
+
+	.client-logo:hover img {
+		opacity: 1;
+		filter: grayscale(0%);
+	}
+
+	.services-teaser {
+		padding: 6rem 0;
+		background: var(--bg-card);
+		/* Distinct background to break up the page */
+	}
+
+	.grid-3 {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	@media(min-width: 768px) {
+		.grid-3 {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	.service-item {
+		padding: 2rem;
+		background: var(--bg-main);
+		border: 1px solid #222;
+		border-radius: 8px;
+		transition: transform 0.3s ease, border-color 0.3s ease;
+	}
+
+	.service-item:hover {
+		transform: translateY(-5px);
+		border-color: var(--accent);
+	}
+
+	.service-icon {
+		font-size: 2.5rem;
+		margin-bottom: 1.5rem;
+		display: block;
+	}
+
+	.service-item h3 {
+		font-size: 1.25rem;
+		margin-bottom: 1rem;
+		color: var(--text-main);
+	}
+
+	.service-item p {
+		line-height: 1.6;
+	}
+
+	.cta-banner {
+		padding: 8rem 0;
+		background: linear-gradient(to top, #000, #0a0a0a);
+		text-align: center;
+	}
+
+	/* Centering helper for CTA */
+	.mx-auto {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.max-w-2xl {
+		max-width: 42rem;
+	}
+
+	.mb-4 {
+		margin-bottom: 1rem;
+	}
+
+	.mb-8 {
+		margin-bottom: 2rem;
+	}
 </style>

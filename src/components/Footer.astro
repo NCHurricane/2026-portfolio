@@ -1,0 +1,62 @@
+---
+// src/components/Footer.astro
+const today = new Date();
+---
+
+<footer class="site-footer">
+    <div class="container footer-content">
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/chuckcopeland" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://www.instagram.com/chuck_copeland/" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/@chuckcopeland" target="_blank" aria-label="YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://x.com/chuckcopelandwx" target="_blank" aria-label="X">
+                <i class="fab fa-x-twitter"></i>
+            </a>
+        </div>
+        <p class="copyright text-muted">
+            &copy; {today.getFullYear()} Chuck Copeland. All Rights Reserved.
+        </p>
+    </div>
+</footer>
+
+<style>
+    .site-footer {
+        border-top: 1px solid #222;
+        padding: 4rem 0;
+        margin-top: 4rem;
+        background: var(--bg-card);
+    }
+
+    .footer-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .social-links a {
+        color: var(--text-muted);
+        font-size: 1.5rem;
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .social-links a:hover {
+        color: var(--accent);
+        transform: translateY(-3px);
+    }
+
+    .copyright {
+        font-size: 0.9rem;
+    }
+</style>

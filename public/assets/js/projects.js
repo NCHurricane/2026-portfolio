@@ -55,7 +55,7 @@
             </div>
         `;
 
-    fetch("data/projects.json")
+    fetch("data/video.json")
       .then(function (res) {
         if (!res.ok) {
           throw new Error(`HTTP ${res.status}: ${res.statusText}`);

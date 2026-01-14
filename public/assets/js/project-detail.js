@@ -355,7 +355,7 @@
   var container = document.getElementById("projectDetail");
 
   if (container) {
-    fetch("data/projects.json")
+    fetch("data/video.json")
       .then(function (res) { return res.json(); })
       .then(function (projects) {
         var rawId = new URLSearchParams(window.location.search).get("id");

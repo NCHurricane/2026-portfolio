@@ -1,14 +1,14 @@
 ---
-// src/pages/work/[id].astro
+// src/pages/video/[id].astro
 import Layout from '../../layouts/Layout.astro';
-import projects from '../../data/projects.json';
+import projects from '../../data/videos.json';
 
-// 1. Tell Astro to generate a page for every ID found in projects.json
+// 1. Tell Astro to generate a page for every ID found in video.json
 export function getStaticPaths() {
-  return projects.map(project => ({
-    params: { id: project.id },
-    props: { project },
-  }));
+return projects.map(project => ({
+params: { id: project.id },
+props: { project },
+}));
 }
 
 // 2. Get the data for the current page
@@ -19,25 +19,22 @@ const isYoutube = project.videoUrl.includes('youtube');
 ---
 
 <Layout title={`${project.title} | Chuck Copeland`}>
-    
+
     <div class="case-study container">
-        
-        <a href="/work" class="back-link">&larr; Back to Work</a>
+
+        <a href="/videos" class="back-link">&larr; Back to Videos</a>
 
         <div class="video-wrapper">
             {isYoutube ? (
-                <iframe 
-                    src={project.videoUrl} 
-                    title={project.title}
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
+            <iframe src={project.videoUrl} title={project.title} frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
             ) : (
-                <video controls poster={`/${project.thumbnail}`}>
-                    <source src={project.videoUrl} type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
+            <video controls poster={`/${project.thumbnail}`}>
+                <source src={project.videoUrl} type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
             )}
         </div>
 
@@ -60,7 +57,7 @@ const isYoutube = project.videoUrl.includes('youtube');
                         <h4>Client</h4>
                         <p>{project.client}</p>
                     </div>
-                    </div>
+                </div>
             </div>
         </div>
 
@@ -72,7 +69,8 @@ const isYoutube = project.videoUrl.includes('youtube');
     .case-study {
         padding-top: 8rem;
         padding-bottom: 4rem;
-        max-width: 1200px; /* Constrain reading width */
+        max-width: 1200px;
+        /* Constrain reading width specifically for this page */
     }
 
     .back-link {
@@ -84,25 +82,30 @@ const isYoutube = project.videoUrl.includes('youtube');
         letter-spacing: 1px;
     }
 
-    .back-link:hover { color: var(--accent); }
+    .back-link:hover {
+        color: var(--accent);
+    }
 
     /* Video Player - 16:9 Aspect Ratio Lock */
     .video-wrapper {
         position: relative;
-        padding-bottom: 56.25%; /* 16:9 */
+        padding-bottom: 56.25%;
+        /* 16:9 */
         height: 0;
         background: #000;
         border-radius: 8px;
         overflow: hidden;
         margin-bottom: 3rem;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     }
 
-    .video-wrapper iframe, 
+    .video-wrapper iframe,
     .video-wrapper video {
         position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         object-fit: contain;
     }
 
@@ -111,11 +114,6 @@ const isYoutube = project.videoUrl.includes('youtube');
         border-bottom: 1px solid #222;
         padding-bottom: 2rem;
         margin-bottom: 2rem;
-    }
-
-    .info-header h1 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
     }
 
     .badge {
@@ -142,8 +140,6 @@ const isYoutube = project.videoUrl.includes('youtube');
     }
 
     .main-desc p {
-        line-height: 1.8;
-        font-size: 1.1rem;
         color: #ccc;
     }
 

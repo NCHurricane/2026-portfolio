@@ -1,62 +1,110 @@
 ---
 // src/components/Navbar.astro
+const navLinks = [
+{ name: 'Home', href: '/' },
+{ name: 'Videos', href: '/videos' },
+{ name: 'Photography', href: '/photos' },
+{ name: 'About', href: '/about' },
+{ name: 'Contact', href: '#', isContact: true }
+];
+
+const currentPath=Astro.url.pathname;
 ---
-<header class="navbar">
-    <div class="container nav-content">
+<header class="site-header">
+    <div class="container nav-container">
+
         <a href="/" class="logo">
             CHUCK<span class="text-accent">COPELAND</span>
         </a>
 
-        <nav>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/work">Work</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="#" id="contact-btn" class="btn-primary"
-                        style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Contact</a>
-                </li>
-            </ul>
+        <nav class="desktop-nav">
+            {navLinks.map(link => (
+            <a href={link.href} class:list={[ { 'active' : currentPath===link.href }, { 'contact-trigger' :
+                link.isContact } /* Special class for Contact */ ]}>
+                {link.name}
+            </a>
+            ))}
         </nav>
+
+        <button class="mobile-toggle" aria-label="Open Menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
     </div>
+
+    <nav class="mobile-nav">
+        {navLinks.map(link => (
+        <a href={link.href} class:list={[ { 'active' : currentPath===link.href }, { 'contact-trigger' : link.isContact }
+            ]}>
+            {link.name}
+        </a>
+        ))}
+    </nav>
 </header>
 
 <script>
-    // This runs on the client browser, not the server.
-    // Bots reading the source code won't see the email address.
-    const btn = document.getElementById('contact-btn');
+    document.addEventListener('astro:page-load', () => {
+        // 1. MOBILE MENU LOGIC
+        const toggle = document.querySelector('.mobile-toggle');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const header = document.querySelector('.site-header');
 
-    if (btn) {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault(); // Stop the # link
+        if (toggle && mobileNav) {
+            toggle.addEventListener('click', () => {
+                toggle.classList.toggle('active');
+                mobileNav.classList.toggle('open');
+                header.classList.toggle('menu-open');
+            });
+        }
 
-            // Reconstruct the email parts
-            const user = 'chuck';
-            const domain = 'chuckcopeland.com';
-            const subject = 'Project Inquiry'; // Pre-fill the subject line for them
+        // 2. BOT-PROOF EMAIL LOGIC
+        // We look for any link with the class 'contact-trigger'
+        const contactLinks = document.querySelectorAll('.contact-trigger');
 
-            // Force the browser to open the mail client
-            window.location.href = `mailto:${user}@${domain}?subject=${encodeURIComponent(subject)}`;
+        contactLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); // Stop it from going to '#'
+
+                // EDIT THESE TWO VARIABLES:
+                const user = 'chuck';
+                const domain = 'chuckcopeland.com'; // or whatever your actual domain is
+
+                // The browser assembles it instantly, but bots can't read it in the source code
+                window.location.href = `mailto:${user}@${domain}`;
+
+                // Optional: Close mobile menu if it was open
+                if (mobileNav) {
+                    mobileNav.classList.remove('open');
+                    toggle.classList.remove('active');
+                }
+            });
         });
-    }
+    });
 </script>
 
 <style>
-    .navbar {
+    /* ... (Keep your existing styles exactly the same) ... */
+    /* ... Paste the CSS from the previous step here ... */
+
+    .site-header {
         position: fixed;
         top: 0;
+        left: 0;
         width: 100%;
+        z-index: 1000;
+        padding: 1rem 0;
+        transition: all 0.3s ease;
         background: rgba(10, 10, 10, 0.85);
-        /* Glass effect */
         backdrop-filter: blur(10px);
-        z-index: 100;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .nav-content {
+    .nav-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: 80px;
     }
 
     .logo {
@@ -64,26 +112,120 @@
         font-size: 1.5rem;
         font-weight: 700;
         letter-spacing: 1px;
+        color: var(--text-main);
+        z-index: 1001;
     }
 
-    .nav-links {
+    .desktop-nav {
+        display: none;
+    }
+
+    @media (min-width: 768px) {
+        .desktop-nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .desktop-nav a {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: var(--font-heading);
+            color: var(--text-muted);
+            position: relative;
+            cursor: pointer;
+            /* Ensures the Contact link looks clickable */
+        }
+
+        .desktop-nav a:hover,
+        .desktop-nav a.active {
+            color: var(--text-main);
+        }
+
+        .desktop-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .desktop-nav a:hover::after,
+        .desktop-nav a.active::after {
+            width: 100%;
+        }
+    }
+
+    .mobile-toggle {
         display: flex;
-        gap: 2.5rem;
-        list-style: none;
+        flex-direction: column;
+        gap: 6px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    @media (min-width: 768px) {
+        .mobile-toggle {
+            display: none;
+        }
+    }
+
+    .bar {
+        width: 30px;
+        height: 2px;
+        background-color: var(--text-main);
+        transition: all 0.3s ease;
+    }
+
+    .mobile-toggle.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+        background-color: var(--accent);
+    }
+
+    .mobile-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-toggle.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+        background-color: var(--accent);
+    }
+
+    .mobile-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--bg-main);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        margin: 0;
-        padding: 0;
+        gap: 2rem;
+        transform: translateY(-100%);
+        transition: transform 0.4s ease-in-out;
+        z-index: 1000;
     }
 
-    .nav-links a:not(.btn-primary) {
-        font-size: 0.9rem;
+    .mobile-nav.open {
+        transform: translateY(0);
+    }
+
+    .mobile-nav a {
+        font-family: var(--font-heading);
+        font-size: 2rem;
         text-transform: uppercase;
-        letter-spacing: 1px;
-        opacity: 0.8;
+        color: var(--text-muted);
     }
 
-    .nav-links a:not(.btn-primary):hover {
+    .mobile-nav a.active,
+    .mobile-nav a:hover {
         color: var(--accent);
-        opacity: 1;
     }
 </style>

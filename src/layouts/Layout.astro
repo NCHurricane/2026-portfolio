@@ -1,31 +1,106 @@
 ---
 // src/layouts/Layout.astro
+
+import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
+
+// Components
 import Navbar from '../components/Navbar.astro';
-import '@fontsource/oswald';
-import '@fontsource/inter';
+import Footer from '../components/Footer.astro';
+
+// Font Imports
+import '@fontsource/oswald/400.css';
+import '@fontsource/oswald/500.css';
+import '@fontsource/oswald/700.css';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/700.css';
 
 interface Props {
-	title: string;
-	description?: string;
+title: string;
+description?: string;
+image?: string;
 }
 
-const { title, description = "Chuck Copeland - Multimedia Artist & Video Editor" } = Astro.props;
+const {
+title,
+description = "Chuck Copeland - Multimedia Artist & Video Editor",
+image = "/assets/img/og-image.png"
+} = Astro.props;
+
+const siteUrl = "https://chuckcopeland.com";
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-		<meta name="description" content={description} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<Navbar />
-		<slot /> <footer style="border-top: 1px solid #222; padding: 4rem 0; text-align: center; margin-top: 4rem;">
-            <p class="text-muted" style="font-size: 0.9rem;">&copy; {new Date().getFullYear()} Chuck Copeland. All Rights Reserved.</p>
-        </footer>
-	</body>
+
+    <head>
+        <ClientRouter />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+        <meta name="generator" content={Astro.generator} />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.css"
+            rel="stylesheet">
+
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={siteUrl} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={new URL(image, siteUrl)} />
+    </head>
+
+    <body>
+
+        <Navbar />
+
+        <main>
+            <slot />
+        </main>
+
+        <Footer />
+
+
+        <script>
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) { entry.target.classList.add('active'); }
+                });
+            }, observerOptions);
+
+            document.addEventListener('astro:page-load', () => {
+                const elements = document.querySelectorAll('.reveal');
+                elements.forEach(el => observer.observe(el));
+            });
+        </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.js"
+            is:inline></script>
+
+        <script>
+            // 1. Define variable outside to track the active instance
+            let lightbox;
+
+            document.addEventListener('astro:page-load', () => {
+                // 2. Kill the old instance if it exists (Fixes the "Double Overlay" bug)
+                if (lightbox) {
+                    lightbox.destroy();
+                }
+
+                // 3. Create fresh instance
+                lightbox = new SimpleLightbox('.masonry-grid a, .lightbox-trigger', {
+                    captionsData: 'data-caption', // Uses your HTML-formatted captions
+                    captionSelector: 'self',
+                    captionDelay: 250,
+                    disableScroll: false,
+                });
+            });
+        </script>
+    </body>
+
 </html>

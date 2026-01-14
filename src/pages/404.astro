@@ -8,7 +8,7 @@ import Layout from '../layouts/Layout.astro';
         <h1 class="text-accent">404</h1>
         <h2>Page Not Found</h2>
         <p class="text-muted">The page you are looking for has been moved or deleted.</p>
-        
+
         <div class="actions">
             <a href="/" class="btn-primary">Back to Home</a>
             <a href="/work" class="link-secondary">View Work &rarr;</a>
@@ -18,7 +18,7 @@ import Layout from '../layouts/Layout.astro';
 
 <style>
     .error-container {
-        height: 80vh; /* Takes up most of the screen */
+        height: 80vh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -28,25 +28,17 @@ import Layout from '../layouts/Layout.astro';
 
     h1 {
         font-size: 8rem;
+        /* Special massive size just for 404 */
         line-height: 1;
         margin-bottom: 0;
         opacity: 0.8;
-    }
-
-    h2 {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-    }
-
-    p {
-        margin-bottom: 3rem;
-        font-size: 1.1rem;
     }
 
     .actions {
         display: flex;
         gap: 2rem;
         align-items: center;
+        margin-top: 2rem;
     }
 
     .link-secondary {
@@ -55,7 +47,7 @@ import Layout from '../layouts/Layout.astro';
         text-transform: uppercase;
         letter-spacing: 1px;
     }
-    
+
     .link-secondary:hover {
         color: var(--accent);
     }

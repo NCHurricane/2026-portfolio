@@ -1,0 +1,35 @@
+[
+    {
+        "id": 1,
+        "thumb": "/assets/img/gallery/thumbs/20130814-tiny-treefrog-thumb.jpg",
+        "full": "/assets/img/gallery/20130814-tiny-treefrog.jpg",
+        "alt": "A tiny, green tree frog",
+        "category": "Nature",
+        "title": "Tiny Treefrog",
+        "description": "Found this little guy in the backyard after a storm.",
+        "camera": "Samsung S9",
+        "date": "2013"
+    },
+    {
+        "id": 2,
+        "thumb": "/assets/img/gallery/thumbs/20160818-holden-beach-thumb.jpg",
+        "full": "/assets/img/gallery/20160818-holden-beach.jpg",
+        "alt": "Shelf cloud at Holden Beach, NC",
+        "category": "Weather",
+        "title": "Holden Beach Storm",
+        "description": "Storm clouds roll over the cottages at Holden Beach.",
+        "camera": "Samsung S10",
+        "date": "2016"
+    },
+    {
+        "id": 3,
+        "thumb": "/assets/img/gallery/thumbs/20240623-fishing-with-dad-thumb.jpg",
+        "full": "/assets/img/gallery/20240623-fishing-with-dad.jpg",
+        "alt": "Fishing with Dad",
+        "category": "People",
+        "title": "Fishing with Dad",
+        "description": "My dad looks over the Cashie River before our fishing trip.",
+        "camera": "Samsung S23 Ultra",
+        "date": "2024"
+    }
+]

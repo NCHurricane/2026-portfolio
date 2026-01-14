@@ -1,5 +1,5 @@
 <p align="center">
-      <img src="public/assets/img/logo-new.png" alt="Project Logo" width="128">
+      <img src="public/assets/img/logo-new.png" alt="Project Logo" width="500">
 </p>
 
 # 2026 Portfolio

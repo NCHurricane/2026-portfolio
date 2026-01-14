@@ -1,7 +1,6 @@
 <p align="center">
-  <a href="https://chuckcopeland.com" target="_blank">
-    <img src="public/assets/img/logo.png" alt="Project Logo" width="128">
-  </a>
+      <img src="public/assets/img/logo.png" alt="Project Logo" width="128">
+
 </p>
 
 # 2026 Portfolio

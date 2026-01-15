@@ -4,13 +4,22 @@ import Layout from '../layouts/Layout.astro';
 import photos from '../data/photos.json';
 ---
 
-<Layout title="Photography | Chuck Copeland">
+<Layout title="Photo Gallery | Chuck Copeland">
 
     <section class="page-header">
         <div class="container">
-            <h1>Photography</h1>
+            <h1>Photo Gallery</h1>
             <p class="text-muted">Moments I have captured in the moment using smartphones, drones and digital cameras.
             </p>
+            <div class="header-socials">
+                <span class="label">More on:</span>
+                <a href="https://www.instagram.com/chuck_copeland/" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="https://bsky.app/profile/@chuckcopeland.com" target="_blank" class="social-link">
+                    <i class="fab fa-bluesky"></i> Bluesky
+                </a>
+            </div>
         </div>
     </section>
 

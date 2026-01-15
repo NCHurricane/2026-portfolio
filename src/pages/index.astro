@@ -39,7 +39,7 @@ const clients = [
 
 	<section class="trusted-section reveal">
 		<div class="container">
-			<p class="trusted-label">Current and Past Clients</p>
+			<h2>Current and Past Clients</h2>
 			<div class="client-logos">
 				{clients.map(client => (
 				<div class="client-logo">
@@ -105,21 +105,25 @@ const clients = [
 			<div class="grid-3">
 				<div class="service-item">
 					<i class="fas fa-film text-accent service-icon"></i>
-					<h3>Post-Production</h3>
-					<p class="text-muted text-sm">Davinci Resolve Studio workflow including advanced color grading,
-						motion graphics, and sound design.</p>
+					<h3>Video Production</h3>
+					<p class="text-muted text-sm">End-to-end editing using Premiere Pro and Davinci Resolve Studio. Also
+						proficient at color
+						grading, motion tracking, and
+						narrative storytelling that retains viewer attention.</p>
 				</div>
 				<div class="service-item">
-					<i class="fas fa-paper-plane text-accent service-icon"></i>
-					<h3>Aerial Cinematography</h3>
-					<p class="text-muted text-sm">FAA Part 107 Certified Drone Pilot capturing unique perspectives for
-						real estate, events, and inspection.</p>
+					<i class="fa-solid fa-pen-nib text-accent service-icon"></i>
+					<h3>Motion Design & Branding</h3>
+					<p class="text-muted text-sm">Bringing static assets to life. 2D/3D animation, logo reveals, and
+						composite visual effects using After Effects and
+						Unreal Engine.</p>
 				</div>
 				<div class="service-item">
-					<i class="fas fa-code text-accent service-icon"></i>
-					<h3>Web Development</h3>
-					<p class="text-muted text-sm">Modern responsive websites built with Astro, Tailwind, and PHP for
-						speed and performance.</p>
+					<i class="fa-solid fa-mobile-screen-button text-accent service-icon"></i>
+					<h3>Web & Digital Strategy</h3>
+					<p class="text-muted text-sm">Building the platform and the audience. Custom responsive websites
+						(HTML/CSS), SEO optimization, Email marketing and data-driven social
+						media campaigns.</p>
 				</div>
 			</div>
 		</div>
@@ -192,32 +196,38 @@ const clients = [
 	.section-header {
 		display: flex;
 		justify-content: space-between;
-		align-items: end;
+		align-items: center;
 		margin-bottom: 2rem;
 		border-bottom: 1px solid #222;
 		padding-bottom: 1rem;
+		gap: 1rem;
+	}
+
+	.section-header h2 {
+		margin-bottom: 0;
+		line-height: 1;
 	}
 
 	.view-all {
 		color: var(--text-muted);
-		font-size: 0.9rem;
+		font-family: var(--font-heading);
+		font-size: clamp(0.9rem, 1vw + 0.2rem, 1.1rem);
+		display: inline-block;
+		text-align: right;
 	}
 
 	.view-all:hover {
 		color: var(--accent);
 	}
 
-	/* --- THE NEW 16:9 UNIFORM GRID --- */
 	.media-grid {
 		display: grid;
-		/* Mobile: 1 column */
 		grid-template-columns: 1fr;
 		gap: 2rem;
 	}
 
 	@media (min-width: 768px) {
 		.media-grid {
-			/* Tablet/Desktop: Fit as many 400px cards as possible */
 			grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 		}
 	}
@@ -309,15 +319,15 @@ const clients = [
 		background: #0f0f0f;
 		/* Slightly lighter than main bg */
 		border-bottom: 1px solid #222;
-		text-align: center;
+		/* text-align: center; */
 	}
 
 	.trusted-label {
-		font-size: 1rem;
+		/* font-size: 2rem; */
 		text-transform: uppercase;
 		letter-spacing: 2px;
-		color: #555;
-		margin-bottom: 1.5rem;
+		/* color: #555; */
+		margin-bottom: 3rem;
 		font-family: var(--font-heading);
 	}
 
@@ -337,7 +347,7 @@ const clients = [
 	}
 
 	.client-logo img {
-		max-height: 75px;
+		max-height: 100px;
 		max-width: 200px;
 		opacity: 0.5;
 		filter: grayscale(100%);
@@ -361,7 +371,7 @@ const clients = [
 	}
 
 	.client-logo:hover {
-		transform: translateY(-5px) scale(1.05);
+		transform: translateY(-5px) scale(1.25);
 	}
 
 	.services-teaser {

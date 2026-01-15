@@ -3,22 +3,15 @@
 import Layout from '../layouts/Layout.astro';
 import projects from '../data/videos.json';
 import photos from '../data/photos.json';
+import ClientLogos from '../components/ClientLogos.astro';
 
 // Select Top 3 Videos & Photos
 const featuredIds = ['2024-showreel', 'crosspointe-15', 'farming-drone'];
 const featuredProjects = projects.filter(p => featuredIds.includes(p.id));
 const featuredPhotos = photos.slice(0, 3);
-
-// Client List (Social Proof)
-const clients = [
-{ name: "Crosspointe Church", img: "/assets/img/crosspointe.png" },
-{ name: "Lisa Evans", img: "/assets/img/lisaevans.png" },
-{ name: "BDO", img: "/assets/img/bdologo.png" },
-{ name: "RBS Rentals", img: "/assets/img/rbsrentals.png" }
-];
 ---
 
-<Layout title="Chuck Copeland | Multimedia Specialist">
+<Layout title="Chuck Copeland | Digital Creator & Video Editor">
 
 	<section class="hero">
 		<video autoplay muted loop playsinline class="hero-video" poster="/assets/img/hero-fallback.webp">
@@ -40,13 +33,7 @@ const clients = [
 	<section class="trusted-section reveal">
 		<div class="container">
 			<h2>Current and Past Clients</h2>
-			<div class="client-logos">
-				{clients.map(client => (
-				<div class="client-logo">
-					<img src={client.img} alt={client.name} loading="lazy" />
-				</div>
-				))}
-			</div>
+			<ClientLogos />
 		</div>
 	</section>
 
@@ -132,7 +119,7 @@ const clients = [
 
 	<section class="cta-banner">
 		<div class="container text-center">
-			<h2 class="mb-4">Have a project in mind?</h2>
+			<h2 class="mb-4">What can I help you create?</h2>
 			<p class="text-muted mb-8 max-w-2xl mx-auto">From concept to final cut, I help brands and businesses tell
 				their story through compelling visuals.</p>
 			<a href="#" class="btn-primary contact-trigger">Let's Work Together</a>
@@ -322,56 +309,6 @@ const clients = [
 
 	.trusted-section h2 {
 		padding: 0 0 1rem 0;}
-
-	.trusted-label {
-		text-transform: uppercase;
-		letter-spacing: 2px;
-		margin-bottom: 3rem;
-		font-family: var(--font-heading);
-	}
-
-	.logo-grid {
-		display: flex;
-		justify-content: center;
-		gap: 2rem;
-		flex-wrap: wrap;
-	}
-
-	.client-logos {
-		display: flex;
-		justify-content: space-around;
-		align-items: center;
-		flex-wrap: wrap;
-		gap: 1rem;
-	}
-
-	.client-logo img {
-		max-height: 100px;
-		max-width: 200px;
-		opacity: 0.5;
-		filter: grayscale(100%);
-		transition: all 0.3s ease;
-	}
-
-	@media (max-width: 768px) {
-		.client-logo img {
-			max-height: 50px;
-			max-width: 200px;
-		}
-	}
-
-	.client-logo:hover img {
-		opacity: 1;
-		filter: grayscale(0%);
-	}
-
-	.client-logo {
-		transition: transform 0.3s ease;
-	}
-
-	.client-logo:hover {
-		transform: translateY(-5px) scale(1.25);
-	}
 
 	.services-teaser {
 		padding: 6rem 0;

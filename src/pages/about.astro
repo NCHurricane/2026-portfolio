@@ -1,6 +1,7 @@
 ---
 // src/pages/about.astro
 import Layout from '../layouts/Layout.astro';
+import ClientLogos from '../components/ClientLogos.astro';
 
 // You can move these to a JSON file later if you want, but inline is fine for now
 const skills = [
@@ -19,13 +20,6 @@ icon: "fa-solid fa-laptop-code",
 title: "Web Development",
 desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for small businesses."
 }
-];
-
-const clients = [
-{ name: "Crosspointe Church", img: "/assets/img/crosspointe.png" },
-{ name: "Lisa Evans", img: "/assets/img/lisaevans.png" },
-{ name: "BDO", img: "/assets/img/bdologo.png" },
-{ name: "RBS Rentals", img: "/assets/img/rbsrentals.png" }
 ];
 ---
 
@@ -137,13 +131,7 @@ const clients = [
             <div class="section-header">
                 <h2>Current and Past Clients</h2>
             </div>
-            <div class="client-logos">
-                {clients.map(client => (
-                <div class="client-logo">
-                    <img src={client.img} alt={client.name} loading="lazy" />
-                </div>
-                ))}
-            </div>
+            <ClientLogos />
         </section>
 
     </div>
@@ -273,41 +261,5 @@ const clients = [
         border-bottom: 1px solid #222;
         padding-bottom: 1rem;
         margin-bottom: 3rem;
-    }
-
-    .client-logos {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 3rem;
-    }
-
-    .client-logo img {
-        max-height: 100px;
-        max-width: 200px;
-        opacity: 0.5;
-        filter: grayscale(100%);
-        transition: all 0.3s ease;
-    }
-
-    .client-logo {
-        transition: transform 0.3s ease;
-    }
-
-    .client-logo:hover {
-        transform: translateY(-5px) scale(1.25);
-    }
-
-    @media (max-width: 768px) {
-        .client-logo img {
-            max-height: 75px;
-            max-width: 200px;
-        }
-    }
-
-    .client-logo:hover img {
-        opacity: 1;
-        filter: grayscale(0%);
     }
 </style>

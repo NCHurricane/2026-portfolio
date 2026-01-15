@@ -4,6 +4,7 @@
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 
+
 // Components
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
@@ -25,7 +26,7 @@ image?: string;
 
 const {
 title,
-description = "Chuck Copeland - Multimedia Artist & Video Editor",
+description = "Chuck Copeland - Digital Creator & Video Editor",
 image = "/assets/img/og-image.png"
 } = Astro.props;
 
@@ -84,8 +85,13 @@ const siteUrl = "https://chuckcopeland.com";
             is:inline></script>
 
         <script>
+            declare class SimpleLightbox {
+                constructor(selector: string, options?: any);
+                destroy(): void;
+            }
+
             // 1. Define variable outside to track the active instance
-            let lightbox;
+            let lightbox: SimpleLightbox | undefined;
 
             document.addEventListener('astro:page-load', () => {
                 // 2. Kill the old instance if it exists (Fixes the "Double Overlay" bug)

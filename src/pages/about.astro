@@ -2,8 +2,8 @@
 // src/pages/about.astro
 import Layout from '../layouts/Layout.astro';
 import ClientLogos from '../components/ClientLogos.astro';
+import brands from '../data/brands.json';
 
-// You can move these to a JSON file later if you want, but inline is fine for now
 const skills = [
 {
 icon: "fa-solid fa-film",
@@ -97,7 +97,7 @@ desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for s
                     <div class="skill-card">
                         <i class="fa-solid fa-film icon"></i>
                         <h3>Visual Creation</h3>
-                        <p class="text-muted">My post-production workflow utilizes DaVinci Resolve Studio and the
+                        <p class="skill-info text-muted">My post-production workflow utilizes DaVinci Resolve Studio and the
                             full Adobe Creative Cloud for editing, motion graphics, and graphic design. Whether it's a
                             long-form project, quick social media
                             clip or a weekly email newsletter, I use the best tools to tell
@@ -107,7 +107,7 @@ desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for s
                     <div class="skill-card">
                         <i class="fa-solid fa-code icon"></i>
                         <h3>Web Architecture</h3>
-                        <p class="text-muted">With over 20 years of experience in HTML & CSS and a deep history with
+                        <p class="skill-info text-muted">With over 20 years of experience in HTML & CSS and a deep history with
                             WordPress, I build responsive websites that are fast and accessible. I use VS Code and local
                             testing environments
                             to ensure every line of code works and every element is correct before it goes live.</p>
@@ -116,7 +116,7 @@ desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for s
                     <div class="skill-card">
                         <i class="fa-solid fa-computer icon"></i>
                         <h3>The Engine Room</h3>
-                        <p class="text-muted">Creativity shouldn't have to wait on a loading bar. I built a custom,
+                        <p class="skill-info text-muted">Creativity shouldn't have to wait on a loading bar. I built a custom,
                             128GB RAM, 14900K, NVidia-powered workstation engineered for
                             zero-bottleneck rendering. This allows me to handle complex timelines and heavy
                             multitasking without technical
@@ -127,12 +127,37 @@ desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for s
             </div>
         </section>
 
-        <section class="clients-section container reveal">
-            <div class="section-header">
-                <h2>Current and Past Clients</h2>
+<section class="brands-section reveal">
+    <div class="container">
+    <div class="section-header">
+        <h2>Brands I Manage</h2>
+    </div>
+    
+    <div class="brands-grid">
+        {brands.map((brand) => (
+            <div 
+                class="brand-card" 
+                style={`background-image: url(${brand.bgImage});`}
+            >
+                <div class="brand-logo">
+                    <img src={brand.img} alt={brand.name} loading="lazy" />
+                </div>
+                <div class="brand-info">
+                    <span class="brand-role">{brand.role}</span>
+                    <p>{brand.desc}</p>
+                    
+                    <div class="brand-links">
+                        {brand.links.map((link) => (
+                            <a href={link.url} target="_blank" aria-label={`Visit ${brand.name}`}>
+                                <i class={link.icon}></i>
+                            </a>
+                        ))}
+                    </div>
+                </div>
             </div>
-            <ClientLogos />
-        </section>
+        ))}
+    </div></div>
+</section>
 
     </div>
 
@@ -141,6 +166,7 @@ desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for s
 <style>
     .about-page {
         padding-top: 8rem;
+        cursor: default;
     }
 
     /* BIO SECTION */
@@ -227,8 +253,7 @@ desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for s
     /* SKILLS */
     .skills-section {
         background: var(--bg-card);
-        padding: 6rem 0;
-        margin-bottom: 6rem;
+        padding: 4rem 0;
     }
 
     .skills-section h2 {
@@ -238,12 +263,39 @@ desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for s
     .skills-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 3rem;
+        gap: 2rem;
     }
 
     .skill-card {
-        text-align: center;
+        background-color: var(--bg-main);
+        border: 1px solid #222;
+        border-radius: 12px;
+        border: 1px solid #222;
+        border-radius: 12px;
         padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .skill-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent);
+    }
+
+    .skill-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 0.2rem;
+        color: var(--text-main);
+    }
+
+    .skill-info{
+        font-size: 0.95rem;
+        color: #ccc;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
     }
 
     .icon {
@@ -252,9 +304,83 @@ desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for s
         margin-bottom: 1.5rem;
     }
 
-    /* CLIENTS */
-    .clients-section {
-        margin-bottom: 8rem;
+/* BRANDS SECTION */
+    .brands-section {
+        padding: 4rem 0;
+    }
+
+    .brands-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .brand-card {
+        /* background-color: var(--bg-card); */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border: 1px solid #222;
+        border-radius: 12px;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .brand-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent);
+    }
+
+    .brand-logo img {
+        height: 30px; /* Adjust based on your logo shapes */
+        width: auto;
+        margin-bottom: 1.5rem;
+        object-fit: contain;
+    }
+
+    .brand-info h3 {
+        font-size: 1.4rem;
+        margin-bottom: 0.2rem;
+        color: var(--text-main);
+    }
+
+    .brand-role {
+        font-size: 0.85rem;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .brand-info p {
+        font-size: 0.95rem;
+        color: #ccc;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .brand-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: auto; /* Pushes links to the bottom */
+    }
+
+    .brand-links a {
+        color: var(--text-muted);
+        font-size: 1.2rem;
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .brand-links a:hover {
+        color: var(--accent);
+        transform: scale(1.2);
     }
 
     .section-header {

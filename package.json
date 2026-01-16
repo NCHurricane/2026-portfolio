@@ -10,10 +10,13 @@
   },
   "dependencies": {
     "@fontsource-variable/georama": "^5.2.8",
+    "@fontsource-variable/oswald": "^5.2.8",
+    "@fontsource-variable/roboto-flex": "^5.2.8",
     "@fontsource/georama": "^5.2.8",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/oswald": "^5.2.8",
     "@fontsource/roboto": "^5.2.9",
+    "@fortawesome/fontawesome-free": "^7.1.0",
     "astro": "^5.16.9",
     "simplelightbox": "^2.14.3"
   }

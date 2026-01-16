@@ -12,8 +12,8 @@
   --accent: #ffd700;        /* Your Gold */
   --accent-glow: rgba(255, 215, 0, 0.15);
   
-  --font-heading: 'Oswald', sans-serif;
-  --font-body: 'Roboto', sans-serif;
+  --font-heading: 'Oswald Variable', sans-serif;
+  --font-body: 'Roboto Flex Variable', sans-serif;
 }
 
 /* 1. RESET & DEFAULTS */
@@ -80,6 +80,34 @@ p {
 .text-accent { color: var(--accent); }
 .text-muted { color: var(--text-muted); }
 
+/* Utility for cards with unique background images */
+.card-with-bg {
+    background-color: var(--bg-card);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.card-with-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7); /* Dark overlay for text readability */
+    z-index: 1;
+    transition: background 0.3s ease;
+}
+
+.card-with-bg:hover::before {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.card-with-bg > * {
+    position: relative;
+    z-index: 2;
+}
+
 .hero-content h1 {
     /* Standard header for sub-pages (About, Photos, etc) */
     font-family: 'Georama', sans-serif;
@@ -97,7 +125,7 @@ p {
 
 .page-header h1 {
     /* Standard header for sub-pages (About, Photos, etc) */
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Oswald Variable', sans-serif;
     font-weight: 800;
     ;
 }

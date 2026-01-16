@@ -28,7 +28,7 @@ import photos from '../data/photos.json';
             <div class="masonry-grid">
                 {photos.map((photo) => (
                 <div class="masonry-item reveal">
-                    <a href={photo.full} class="lightbox-trigger" /* WRAP THE TITLE IN A STRONG TAG */
+                    <a href={photo.full} class="lightbox-trigger"
                         data-caption={`<strong>${photo.title}</strong>
                         ${photo.description} <br>
                         <span class="meta">${photo.camera} &bull; ${photo.date}</span>`}

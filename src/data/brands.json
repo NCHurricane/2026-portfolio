@@ -1,0 +1,47 @@
+[
+    {
+        "name": "NCHurricane.com",
+        "bgImage": "/assets/img/nchurricane-bg.webp",
+        "role": "Founder & Digital Creator",
+        "desc": "Eastern North Carolina's source for extreme weather tracking since 2003. Real-time weather updates, forecasts, and storm coverage.",
+        "img": "/assets/img/nchurricane-logo.png",
+        "links": [
+            { "icon": "fab fa-x-twitter", "url": "https://x.com/chuckcopelandwx" },
+            { "icon": "fab fa-instagram", "url": "https://instagram.com/chuck_copeland_wx" },
+            { "icon": "fab fa-bluesky", "url": "https://bsky.app/profile/nchurricane.com" },
+            { "icon": "fab fa-facebook", "url": "https://facebook.com/chuckcopelandwx" },
+            { "icon": "fab fa-youtube", "url": "https://www.youtube.com/@nchurricane" },
+            { "icon": "fab fa-threads", "url": "https://www.threads.net/@chuck_copeland_wx" },
+            { "icon": "fab fa-tiktok", "url": "https://tiktok.com/@chuck_copeland_wx" }
+        ]
+    },
+    {
+        "name": "The NCHurricats",
+        "bgImage": "/assets/img/nchurricats-bg.webp",
+        "role": "CatDad Creator",
+        "desc": "The adventures of Bailey, Teddy, Stormy, and Bella Grace. Cameo appearances from CatDad, Meowmy, and our furangels we have lost in years past.",
+        "img": "/assets/img/nchurricats-logo.png",
+        "links": [
+            { "icon": "fab fa-instagram", "url": "https://instagram.com/nchurricats" },
+            { "icon": "fab fa-bluesky", "url": "https://bsky.app/profile/nchurricats.bsky.social" },
+            { "icon": "fab fa-facebook", "url": "https://facebook.com/nchurricats" },
+            { "icon": "fab fa-youtube", "url": "https://www.youtube.com/@nchurricats" },
+            { "icon": "fab fa-threads", "url": "https://www.threads.net/@nchurricats" },
+            { "icon": "fab fa-tiktok", "url": "https://tiktok.com/@nchurricats" },
+            { "icon": "fab fa-x-twitter", "url": "https://x.com/nchurricats" }
+        ]
+    },
+    {
+        "name": "NCRacer's Garage",
+        "bgImage": "/assets/img/ncracer-bg.webp",
+        "role": "Motorsports Enthusiast",
+        "desc": "Former real-life racer and sim-racer turned digital creator. A reboot of an Nascar Racing Season 2003 website from the early 2000s.",
+        "img": "/assets/img/ncracer-logo.png",
+        "links": [
+            { "icon": "fab fa-twitter", "url": "https://x.com/ncracersgarage" },
+            { "icon": "fab fa-youtube", "url": "https://www.youtube.com/@ncracersgarage" },
+            { "icon": "fab fa-tiktok", "url": "https://www.tiktok.com/@ncracers.garage" },
+            { "icon": "fab fa-facebook", "url": "https://www.facebook.com/ncracersgarage" }
+        ]
+    }
+]

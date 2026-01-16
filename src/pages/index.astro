@@ -13,6 +13,7 @@ const featuredPhotos = photos.slice(0, 3);
 
 <Layout title="Chuck Copeland | Digital Creator & Video Editor">
 
+	<div class="index-page">
 	<section class="hero">
 		<video autoplay muted loop playsinline class="hero-video" poster="/assets/img/hero-fallback.webp">
 			<source src="/assets/video/hero.mp4" type="video/mp4" />
@@ -101,9 +102,8 @@ const featuredPhotos = photos.slice(0, 3);
 				<div class="service-item">
 					<i class="fa-solid fa-pen-nib text-accent service-icon"></i>
 					<h3>Motion Design & Branding</h3>
-					<p class="text-muted text-sm">Bringing static assets to life. 2D/3D animation, logo reveals, and
-						composite visual effects using After Effects and
-						Unreal Engine.</p>
+					<p class="text-muted text-sm">Bringing static assets to life. 2D/3D animation, text animation, logo reveals, and
+						composite visual effects, including rotoscoping, using After Effects, Cinema4D, and Unreal Engine.</p>
 				</div>
 				<div class="service-item">
 					<i class="fa-solid fa-mobile-screen-button text-accent service-icon"></i>
@@ -117,18 +117,31 @@ const featuredPhotos = photos.slice(0, 3);
 	</section>
 
 
-	<section class="cta-banner">
+	<section class="cta-banner reveal">
 		<div class="container text-center">
-			<h2 class="mb-4">What can I help you create?</h2>
-			<p class="text-muted mb-8 max-w-2xl mx-auto">From concept to final cut, I help brands and businesses tell
-				their story through compelling visuals.</p>
-			<a href="#" class="btn-primary contact-trigger">Let's Work Together</a>
+			<h2 class="mb-4">Let’s Make Something Awesome.</h2>
+			<p class="text-muted mb-8 max-w-2xl mx-auto">
+				You bring the vision, I’ll bring the engine room. Whether it's video production, 
+				web dev, or digital strategy, let's build something that stands out.
+			</p>
+			
+			<a href="#" 
+			class="btn-primary contact-trigger" 
+			data-user="chuck" 
+			data-domain="chuckcopeland.com">
+			Let's Work Together
+			</a>
 		</div>
 	</section>
+	</div>
 
 </Layout>
 
 <style>
+	.index-page {
+		cursor: default;
+	}
+	
 	/* HERO STYLES (Unchanged) */
 	.hero {
 		position: relative;
@@ -177,7 +190,7 @@ const featuredPhotos = photos.slice(0, 3);
 
 	/* SECTIONS */
 	.featured-section {
-		padding: 4rem 0;
+		padding: 5rem 0;
 	}
 
 	.section-header {
@@ -302,7 +315,7 @@ const featuredPhotos = photos.slice(0, 3);
 
 	/* NEW STYLES */
 	.trusted-section {
-		padding: 2.5rem 0;
+		padding: 4rem 0;
 		background: #0f0f0f;
 		border-bottom: 1px solid #222;
 	}
@@ -311,14 +324,14 @@ const featuredPhotos = photos.slice(0, 3);
 		padding: 0 0 1rem 0;}
 
 	.services-teaser {
-		padding: 6rem 0;
+		padding: 4rem 0;
 		background: var(--bg-card);
 		/* Distinct background to break up the page */
 	}
 
 	.grid-3 {
 		display: grid;
-		grid-template-columns: 1fr;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		gap: 2rem;
 	}
 
@@ -334,6 +347,7 @@ const featuredPhotos = photos.slice(0, 3);
 		border: 1px solid #222;
 		border-radius: 8px;
 		transition: transform 0.3s ease, border-color 0.3s ease;
+		text-align: center;
 	}
 
 	.service-item:hover {
@@ -344,7 +358,7 @@ const featuredPhotos = photos.slice(0, 3);
 	.service-icon {
 		font-size: 2.5rem;
 		margin-bottom: 1.5rem;
-		display: block;
+		display: inline-block;
 	}
 
 	.service-item h3 {
@@ -354,11 +368,14 @@ const featuredPhotos = photos.slice(0, 3);
 	}
 
 	.service-item p {
-		line-height: 1.6;
+        font-size: 0.95rem;
+        color: #ccc;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
 	}
 
 	.cta-banner {
-		padding: 8rem 0;
+		padding: 4rem 0;
 		background: linear-gradient(to top, #000, #0a0a0a);
 		text-align: center;
 	}

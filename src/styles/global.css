@@ -144,7 +144,7 @@ p {
         font-size: 0.8rem;
         text-transform: uppercase;
         letter-spacing: 1px;
-        color: #555;
+        color: #ffe600cd;
     }
 
     .social-link {
@@ -203,6 +203,10 @@ p {
 .sl-close, .sl-navigation button { color: #fff !important; }
 .sl-spinner { border-color: #fff !important; }
 
+.sl-close {
+    font-size: 1rem;
+}
+
 /* Flexbox Layout for Image/Caption Stacking */
 .sl-wrapper {
     display: flex !important;
@@ -217,18 +221,14 @@ p {
     top: auto !important;
     left: auto !important;
     flex: 0 1 auto;
-
-    /* THE FIX: This centers the photo container horizontally */
     margin: 0 auto !important; 
-    /* Ensures the img tag inside is centered if the wrapper gets wider than the image */
     text-align: center !important; 
 }
 
 .sl-wrapper .sl-image img {
-    max-height: 80vh !important;
+    max-height: 70vh !important;
     max-width: 100%;
     object-fit: contain;
-    border-radius: 4px;
 }
 
 /* Caption Box (This looks correct already!) */
@@ -236,17 +236,17 @@ p {
     /* 1. Layout & Positioning */
     position: relative !important;
     width: 100% !important;
-    max-width: 600px !important;
+    max-width: 1000px !important;
     
     /* 2. FORCE CENTERING (The Fix) */
-    margin: 0.5rem auto !important; /* Top margin + Auto sides */
+    margin: 0.1rem auto !important; /* Top margin + Auto sides */
     left: auto !important;
     right: auto !important;
     transform: none !important; 
     
     /* 3. Text & Appearance */
     text-align: center !important;
-    background: rgba(0, 0, 0, 0.9) !important;
+    background: rgba(0, 0, 0, 0.338) !important;
     padding: 1rem !important;
     border-radius: 8px;
     
@@ -279,8 +279,72 @@ p {
 
 /* Mobile Tweaks */
 @media (max-width: 768px) {
-    .sl-wrapper .sl-caption strong {font-size: 1rem;}
+    .sl-wrapper .sl-caption strong {font-size: 1rem; max-height: 95vh; }
     .sl-wrapper .sl-caption .meta {font-size: 0.75rem;}
     .sl-wrapper .sl-image img { max-height: 70vh !important; }
     .sl-wrapper .sl-caption { width: 90% !important; }
+}
+
+/* 1. Define the Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(100px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 2. Apply it to your cards */
+.media-card,
+.skill-card,
+.service-item,
+.brand-card,
+.project-card,
+.masonry-item {
+    animation: fadeInUp linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 30%;
+}
+
+/* SKELETON LOADING STATE */
+.skeleton {
+    background-color: #1f1f1f; /* Dark gray base */
+    position: relative;
+    overflow: hidden;
+    /* Ensure the container has shape even before image loads */
+    display: block; 
+}
+
+.skeleton img {
+    position: relative;
+    z-index: 2; /* Moves image higher than the shimmer */
+}
+
+/* The moving shine effect */
+.skeleton::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0.05) 20%, /* Subtle highlight */
+        rgba(255, 255, 255, 0.1) 60%,
+        rgba(255, 255, 255, 0)
+    );
+    animation: shimmer 2s infinite;
+    z-index: 0; /* Sits behind the image */
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
 }

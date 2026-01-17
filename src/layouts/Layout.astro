@@ -4,7 +4,6 @@
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 
-
 // Components
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
@@ -16,7 +15,6 @@ import '@fontsource-variable/georama';
 
 // Library Styles
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'simplelightbox/dist/simple-lightbox.min.css';
 
 interface Props {
 title: string;
@@ -26,7 +24,7 @@ image?: string;
 
 const {
 title,
-description = "Chuck Copeland - Digital Creator & Video Editor",
+description = "Chuck Copeland - Multimedia Artist & Video Editor",
 image = "/assets/img/og-image.png"
 } = Astro.props;
 
@@ -42,6 +40,11 @@ const siteUrl = "https://chuckcopeland.com";
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
         <meta name="generator" content={Astro.generator} />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.css"
+            rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swiper/11.0.5/swiper-bundle.min.css">
 
         <title>{title}</title>
         <meta name="description" content={description} />
@@ -77,30 +80,10 @@ const siteUrl = "https://chuckcopeland.com";
             });
         </script>
 
-        <script>
-            declare class SimpleLightbox {
-                constructor(selector: string, options?: any);
-                destroy(): void;
-            }
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/swiper/11.0.5/swiper-bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.js"
+            is:inline></script>
 
-            // 1. Define variable outside to track the active instance
-            let lightbox: SimpleLightbox | undefined;
-
-            document.addEventListener('astro:page-load', () => {
-                // 2. Kill the old instance if it exists (Fixes the "Double Overlay" bug)
-                if (lightbox) {
-                    lightbox.destroy();
-                }
-
-                // 3. Create fresh instance
-                lightbox = new SimpleLightbox('.masonry-grid a, .lightbox-trigger', {
-                    captionsData: 'data-caption', // Uses your HTML-formatted captions
-                    captionSelector: 'self',
-                    captionDelay: 250,
-                    disableScroll: false,
-                });
-            });
-        </script>
     </body>
 
 </html>

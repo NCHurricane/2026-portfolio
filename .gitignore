@@ -26,6 +26,15 @@ Thumbs.db
 *.avi
 *.mkv
 
+#Ignore image files for now
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.webp
+
+
 # Ignore high-res raw photos if you have them (optional)
 *.psd
 *.ai

@@ -69,15 +69,17 @@ const isYoutube = project.videoUrl.includes('youtube');
     .case-study {
         padding-top: 8rem;
         padding-bottom: 4rem;
-        max-width: 1200px;
+        max-width: 1000px;
         /* Constrain reading width specifically for this page */
     }
 
-    .back-link {
+    .back-link,
+    .date {
+        font-family: var(--font-heading););
         display: inline-block;
-        margin-bottom: 2rem;
         color: var(--text-muted);
         font-size: 0.9rem;
+        margin-bottom: 1rem;
         text-transform: uppercase;
         letter-spacing: 1px;
     }
@@ -95,7 +97,7 @@ const isYoutube = project.videoUrl.includes('youtube');
         background: #000;
         border-radius: 8px;
         overflow: hidden;
-        margin-bottom: 3rem;
+        margin-bottom: 1rem;
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     }
 
@@ -112,8 +114,15 @@ const isYoutube = project.videoUrl.includes('youtube');
     /* Details Layout */
     .info-header {
         border-bottom: 1px solid #222;
-        padding-bottom: 2rem;
-        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+    
+    }
+
+    .info-header h1 {
+        color: var(--accent);
+        font-size: clamp(1.8rem, 2.5vw + 1rem, 4rem);
+        weight: 800;
     }
 
     .badge {
@@ -139,7 +148,13 @@ const isYoutube = project.videoUrl.includes('youtube');
         }
     }
 
+    .main-desc h3 {
+        font-size: clamp(1.2rem, 2vw + 1rem, 2rem);
+        margin-bottom: 1rem;
+    }
+
     .main-desc p {
+        font-size: clamp(0.8rem, 1.5vw + 0.5rem, 1rem);
         color: #ccc;
     }
 
@@ -150,6 +165,6 @@ const isYoutube = project.videoUrl.includes('youtube');
     }
 
     .meta-item p {
-        font-size: 1.1rem;
+        font-size: clamp(0.8rem, 1.5vw + 0.5rem, 1rem);
     }
 </style>

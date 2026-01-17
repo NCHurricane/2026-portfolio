@@ -8,7 +8,9 @@ import ClientLogos from '../components/ClientLogos.astro';
 // Select Top 3 Videos & Photos
 const featuredIds = ['2024-showreel', 'crosspointe-15', 'farming-drone'];
 const featuredProjects = projects.filter(p => featuredIds.includes(p.id));
-const featuredPhotos = photos.slice(0, 3);
+
+const featuredPhotoIds = ['1', '4', '3']; // Update with actual IDs from photos.json
+const featuredPhotos = photos.filter(p => featuredPhotoIds.includes(String(p.id))).slice(0, 3);
 ---
 
 <Layout title="Chuck Copeland | Digital Creator & Video Editor">
@@ -20,20 +22,22 @@ const featuredPhotos = photos.slice(0, 3);
 		</video>
 		<div class="hero-overlay"></div>
 		<div class="hero-content container">
-			<h1>Chuck Copeland</h1>
+			<h1 transition:name="hero-name">Chuck Copeland</h1>
 			<span class="text-accent">
 				<h2>Digital Creator</h2>
 			</span>
-			<h3 class="hero-subtitle">Video Editing &bull; Motion Graphics &bull; Web Development &bull; CatDad</h3>
+			<h3 class="hero-subtitle">Video Production &bull; Motion Graphics &bull; Web Development &bull; Photography <br />CatDad</h3>
 			<div class="hero-actions">
-				<a href="#video" class="btn-primary">View Featured Projects</a>
+				<a href="#video" class="btn-primary">Featured Media <i class="fas fa-chevron-down"></i></a>
 			</div>
 		</div>
 	</section>
 
 	<section class="trusted-section reveal">
 		<div class="container">
+			<div class="section-header">
 			<h2>Current and Past Clients</h2>
+			</div>
 			<ClientLogos />
 		</div>
 	</section>
@@ -42,22 +46,24 @@ const featuredPhotos = photos.slice(0, 3);
 		<div class="container">
 			<div class="section-header">
 				<h2>Featured Videos</h2>
-				<a href="/videos" class="view-all">View All Videos</a>
+				<a href="/videos" class="view-all"><i class="fas fa-chevron-right"></i> View All Videos</a>
 			</div>
 			<div class="media-grid">
-				{featuredProjects.map((project) => (
-				<a href={`/video/${project.id}`} class="media-card">
-					<div class="card-image">
-						<img src={`/${project.thumbnail}`} alt={project.title} loading="lazy" />
-						<div class="play-icon"><i class="fas fa-play"></i></div>
-					</div>
-					<div class="card-info">
-						<h3>{project.title}</h3>
-						<p class="text-muted">{project.category}</p>
-					</div>
-				</a>
-				))}
-			</div>
+    {featuredProjects.map((project) => (
+    <a href={`/video/${project.id}`} class="media-card">
+        
+        <div class="card-image skeleton">
+            <img src={`/${project.thumbnail}`} alt={project.title} loading="lazy" />
+            <div class="play-icon"><i class="fas fa-play"></i></div>
+        </div>
+
+        <div class="card-info">
+            <h3>{project.title}</h3>
+            <p class="text-muted">{project.category}</p>
+        </div>
+    </a>
+    ))}
+</div>
 		</div>
 	</section>
 
@@ -65,15 +71,17 @@ const featuredPhotos = photos.slice(0, 3);
 		<div class="container">
 			<div class="section-header">
 				<h2>Featured Photos</h2>
-				<a href="/photos" class="view-all">View Gallery</a>
+				<a href="/photos" class="view-all"><i class="fas fa-chevron-right"></i> View Gallery</a>
 			</div>
 			<div class="media-grid">
 				{featuredPhotos.map((photo) => (
-				<a href={photo.full} class="media-card lightbox-trigger" title={photo.title}>
-					<div class="card-image">
+				<a href={photo.full} class="media-card lightbox-trigger"
+					data-caption={`<strong>${photo.title}</strong><br>${photo.description}<br><span class="meta">${photo.camera} &bull; ${photo.date}</span>`}>
+					<div class="card-image skeleton">
 						<img src={photo.thumb} alt={photo.title} loading="lazy" />
 						<div class="photo-icon"><i class="fas fa-expand"></i></div>
 					</div>
+
 					<div class="card-info">
 						<h3>{photo.title}</h3>
 						<p class="text-muted">{photo.category}</p>
@@ -117,8 +125,8 @@ const featuredPhotos = photos.slice(0, 3);
 	</section>
 
 
-	<section class="cta-banner reveal">
-		<div class="container text-center">
+	<section class="cta-banner">
+		<div class="container text-center reveal">
 			<h2 class="mb-4">Let’s Make Something Awesome.</h2>
 			<p class="text-muted mb-8 max-w-2xl mx-auto">
 				You bring the vision, I’ll bring the engine room. Whether it's video production, 
@@ -134,6 +142,85 @@ const featuredPhotos = photos.slice(0, 3);
 		</div>
 	</section>
 	</div>
+
+<script>
+    let lightbox: any = null;
+
+    function initLightbox() {
+        const gallerySelector = '.media-grid a.lightbox-trigger';
+        if (!document.querySelector(gallerySelector)) return;
+
+        if (lightbox) {
+            lightbox.destroy();
+            lightbox = null;
+        }
+
+        lightbox = new SimpleLightbox(gallerySelector, {
+            captions: false,
+            captionSelector: 'self',
+            captionType: 'attr',
+            captionsData: 'data-caption',
+            captionPosition: 'bottom',
+            captionDelay: 0,
+            animationSpeed: 250,
+            fadeSpeed: 300,
+        });
+
+// Caption animation logic
+        const hideCaption = () => {
+            const caption = document.querySelector('.sl-caption');
+            // FIX: Check if it is an HTMLElement before accessing .style
+            if (caption instanceof HTMLElement) {
+                caption.style.opacity = '0';
+            }
+        };
+
+        const showCaption = () => {
+            const caption = document.querySelector('.sl-caption');
+            // FIX: Check here as well
+            if (caption instanceof HTMLElement) {
+                setTimeout(() => {
+                    caption.style.transition = 'opacity 0.1s';
+                    caption.style.opacity = '1';
+                }, 50);
+            }
+        };
+
+        // Watermark Logic
+        const addWatermark = () => {
+            const imgContainer = document.querySelector('.sl-image');
+            if (imgContainer && !imgContainer.querySelector('.sl-watermark')) {
+                const img = document.createElement('img');
+                img.src = '/assets/img/watermark.png';
+                img.className = 'sl-watermark';
+                img.alt = 'Watermark';
+                imgContainer.appendChild(img);
+            }
+        };
+
+        lightbox.on('open.simplelightbox', hideCaption);
+        lightbox.on('next.simplelightbox', hideCaption);
+        lightbox.on('prev.simplelightbox', hideCaption);
+        lightbox.on('opened.simplelightbox', showCaption);
+        lightbox.on('nextImageLoaded.simplelightbox', showCaption);
+        lightbox.on('prevImageLoaded.simplelightbox', showCaption);
+
+        // Attach Watermark Events
+        lightbox.on('opened.simplelightbox', addWatermark);
+        lightbox.on('nextImageLoaded.simplelightbox', addWatermark);
+        lightbox.on('prevImageLoaded.simplelightbox', addWatermark);
+    }
+
+    function destroyLightbox() {
+        if (lightbox) {
+            lightbox.destroy();
+            lightbox = null;
+        }
+    }
+
+    document.addEventListener('astro:page-load', initLightbox);
+    document.addEventListener('astro:before-swap', destroyLightbox);
+</script>
 
 </Layout>
 
@@ -289,6 +376,7 @@ const featuredPhotos = photos.slice(0, 3);
 		transition: opacity 0.3s ease;
 		backdrop-filter: blur(4px);
 		color: #fff;
+		z-index: 3;
 	}
 
 	.media-card:hover .play-icon,
@@ -317,12 +405,11 @@ const featuredPhotos = photos.slice(0, 3);
 	.trusted-section {
 		padding: 4rem 0;
 		background: #0f0f0f;
-		border-bottom: 1px solid #222;
 	}
 
 	.trusted-section h2 {
-		padding: 0 0 1rem 0;}
-
+		padding: 0 0 1rem 0;
+	}
 	.services-teaser {
 		padding: 4rem 0;
 		background: var(--bg-card);
@@ -376,7 +463,9 @@ const featuredPhotos = photos.slice(0, 3);
 
 	.cta-banner {
 		padding: 4rem 0;
-		background: linear-gradient(to top, #000, #0a0a0a);
+		background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/img/sunset-farm.webp');
+		background-size: cover;
+		background-position: center;
 		text-align: center;
 	}
 
@@ -397,4 +486,59 @@ const featuredPhotos = photos.slice(0, 3);
 	.mb-8 {
 		margin-bottom: 2rem;
 	}
+
+	/* Photo Carousel Styles */
+	.swiper-slide a {
+		display: block;
+		position: relative;
+		overflow: hidden;
+		border-radius: 8px;
+		aspect-ratio: 16 / 9;
+	}
+	.swiper-slide img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.4s ease;
+	}
+	.swiper-slide a:hover img {
+		transform: scale(1.05);
+	}
+	.photo-overlay {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		padding: 1rem;
+		background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+		display: flex;
+		align-items: flex-end;
+	}
+	.category-badge {
+		background: var(--accent);
+		color: #fff;
+		padding: 0.3rem 0.6rem;
+		border-radius: 4px;
+		font-size: 0.75rem;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+	.swiper-button-next, .swiper-button-prev {
+		color: var(--accent);
+		--swiper-navigation-size: 2rem;
+	}
+
+    /* Lightbox Watermark */
+    :global(.sl-watermark) {
+        position: absolute;
+        top: 3%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 25px !important;
+        width: auto !important;
+        z-index: 10000;
+        opacity: 0.4;
+        pointer-events: none;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
 </style>

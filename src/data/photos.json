@@ -7,7 +7,7 @@
         "category": "Nature",
         "title": "Tiny Treefrog",
         "description": "Found this little guy in the backyard after a storm.",
-        "camera": "Samsung S9",
+        "camera": "Samsung Smartphone",
         "date": "2013"
     },
     {
@@ -18,7 +18,7 @@
         "category": "Weather",
         "title": "Holden Beach Storm",
         "description": "Storm clouds roll over the cottages at Holden Beach.",
-        "camera": "Samsung S10",
+        "camera": "Samsung Smartphone",
         "date": "2016"
     },
     {
@@ -29,7 +29,51 @@
         "category": "People",
         "title": "Fishing with Dad",
         "description": "My dad looks over the Cashie River before our fishing trip.",
-        "camera": "Samsung S23 Ultra",
+        "camera": "Samsung Smartphone",
+        "date": "2024"
+    },
+    {
+        "id": 4,
+        "thumb": "/assets/img/gallery/thumbs/20190209-sunset-farm-thumb.jpg",
+        "full": "/assets/img/gallery/20190209-sunset-farm.jpg",
+        "alt": "Sunset over the farm",
+        "category": "Weather",
+        "title": "Sunset on the Farm",
+        "description": "A beautiful sunset over the farm in North Carolina.",
+        "camera": "Samsung Smartphone",
+        "date": "2019"
+    },
+    {
+        "id": 5,
+        "thumb": "/assets/img/gallery/thumbs/20190622-dragonfly-thumb.jpg",
+        "full": "/assets/img/gallery/20190622-dragonfly.jpg",
+        "alt": "A dragonfly on a fence post",
+        "category": "Nature",
+        "title": "Dragonfly Silhouette",
+        "description": "A dragonfly resting on a fence post.",
+        "camera": "Samsung Smartphone",
+        "date": "2019"
+    },
+    {
+        "id": 6,
+        "thumb": "/assets/img/gallery/thumbs/20250523-stormy-whiskers-thumb.jpg",
+        "full": "/assets/img/gallery/20250523-stormy-whiskers.jpg",
+        "alt": "Stormy the Hurricat, showing off his whiskers",
+        "category": "Pets",
+        "title": "Stormy's Whiskers",
+        "description": "My cat Stormy with his whiskers.",
+        "camera": "Samsung Smartphone",
+        "date": "2025"
+    },
+    {
+        "id": 7,
+        "thumb": "/assets/img/gallery/thumbs/20241015-comet-thumb.jpg",
+        "full": "/assets/img/gallery/20241015-comet.jpg",
+        "alt": "Comet Tsuchinshan-ATLAS over the Washington, NC waterfront",
+        "category": "Astrophotography",
+        "title": "Comet Tsuchinshan-ATLAS",
+        "description": "Comet Tsuchinshan-ATLAS over the Washington, NC waterfront",
+        "camera": "Sony ZV-E10",
         "date": "2024"
     }
 ]

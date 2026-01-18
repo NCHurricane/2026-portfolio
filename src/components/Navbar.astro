@@ -1,5 +1,8 @@
 ---
 // src/components/Navbar.astro
+import { fadeTransition } from '../scripts/transitions.js';
+
+
 const navLinks = [
 { name: 'Home', href: '/' },
 { name: 'Video Gallery', href: '/videos' },
@@ -13,7 +16,7 @@ const currentPath=Astro.url.pathname;
 <header class="site-header">
     <div class="container nav-container">
 
-        <a href="/" class="logo">
+        <a href="/" transition:animate={fadeTransition} class="logo">
             CHUCK<span class="text-accent">COPELAND</span>
         </a>
 

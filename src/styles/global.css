@@ -11,6 +11,7 @@
   
   --accent: #ffd700;        /* Your Gold */
   --accent-glow: rgba(255, 215, 0, 0.15);
+  --accent-aqua: #00ffff;   /* Accent Aqua for highlights */
   
   --font-heading: 'Oswald Variable', sans-serif;
   --font-body: 'Roboto Flex Variable', sans-serif;

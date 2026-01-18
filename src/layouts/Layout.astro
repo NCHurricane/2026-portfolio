@@ -136,9 +136,74 @@ const siteUrl = "https://chuckcopeland.com";
 </html>
 
 <style is:global>
-  /* === ANIMATION KEYFRAMES === */
+  /* =========================================
+     VIEW TRANSITION ANIMATIONS
+     ========================================= */
 
-  /* Vertical Slide */
+  /* --- FADE --- */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  /* --- ZOOM: SUBTLE (Standard) --- */
+  @keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes zoomOut {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.95); }
+  }
+
+  /* --- ZOOM: INTENSE (Pop Effect) --- */
+  /* Great for 'zoomInEntry' on index page */
+  @keyframes zoomInEntry {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  /* Great for 'zoomOutExit' */
+  @keyframes zoomOutExit {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.5); }
+  }
+  
+  /* Reverse Pop (Start big, shrink in) */
+  @keyframes zoomOutEntry {
+    from { opacity: 0; transform: scale(1.5); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* --- SLIDE: HORIZONTAL --- */
+
+  /* MOVE LEFT (Push flow: New page enters from Right) */
+  /* Used in your existing setup */
+  @keyframes slideLeftOut {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(-60px); }
+  }
+  @keyframes slideLeftIn { /* New page entering from Right */
+    from { opacity: 0; transform: translateX(60px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* MOVE RIGHT (Back flow: New page enters from Left) */
+  @keyframes slideRightOut {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(60px); }
+  }
+  @keyframes slideRightIn { /* New page entering from Left */
+    from { opacity: 0; transform: translateX(-60px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* --- SLIDE: VERTICAL --- */
+
+  /* MOVE UP (New page enters from Bottom) */
   @keyframes slideUpOut {
     from { opacity: 1; transform: translateY(0); }
     to { opacity: 0; transform: translateY(-20px); }
@@ -147,18 +212,15 @@ const siteUrl = "https://chuckcopeland.com";
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
-  /* Horizontal Slide */
-  @keyframes slideRightOut {
-    from { opacity: 1; transform: translateX(0); }
-    to { opacity: 0; transform: translateX(40px); }
+    @keyframes slideUpOutIntense {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-80px); }
   }
-  @keyframes slideLeftIn {
-    from { opacity: 0; transform: translateX(-40px); }
-    to { opacity: 1; transform: translateX(0); }
+  @keyframes slideUpInIntense {
+    from { opacity: 0; transform: translateY(80px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-
-  /* NEW: Slide Down */
+  /* MOVE DOWN (New page enters from Top) */
   @keyframes slideDownOut {
     from { opacity: 1; transform: translateY(0); }
     to { opacity: 0; transform: translateY(20px); }
@@ -167,38 +229,31 @@ const siteUrl = "https://chuckcopeland.com";
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
-  /* NEW: Slide Left (Standard) */
-  @keyframes slideLeftOut {
-    from { opacity: 1; transform: translateX(0); }
-    to { opacity: 0; transform: translateX(-40px); }
+    @keyframes slideDownOutIntense {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(80px); }
   }
-  @keyframes slideRightIn {
-    from { opacity: 0; transform: translateX(40px); }
-    to { opacity: 1; transform: translateX(0); }
+  @keyframes slideDownInIntense {
+    from { opacity: 0; transform: translateY(-80px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-
-  /* === ZOOM IN (Pop) === */
-  /* Entering: Grows from 90% to 100% */
-  @keyframes zoomInEntry {
-    from { opacity: 0; transform: scale(0.5); }
-    to { opacity: 1; transform: scale(1); }
+  /* --- BLUR --- */
+  @keyframes blurOut {
+    from { opacity: 1; filter: blur(0px); }
+    to { opacity: 0; filter: blur(10px); }
   }
-  /* Exiting: Shrinks from 100% to 90% */
-  @keyframes zoomOutExit {
-    from { opacity: 1; transform: scale(1); }
-    to { opacity: 0; transform: scale(0.9); }
+  @keyframes blurIn {
+    from { opacity: 0; filter: blur(10px); }
+    to { opacity: 1; filter: blur(0px); }
   }
 
-  /* === ZOOM OUT (Cinematic) === */
-  /* Entering: Shrinks from 105% to 100% */
-  @keyframes zoomOutEntry {
-    from { opacity: 0; transform: scale(1.05); }
-    to { opacity: 1; transform: scale(1); }
+  /* --- SPIN (Rotate) --- */
+  @keyframes spinOut {
+    from { transform: rotate(0deg) scale(1); opacity: 1; }
+    to { transform: rotate(-90deg) scale(0.5); opacity: 0; }
   }
-  /* Exiting: Grows from 100% to 105% */
-  @keyframes zoomInExit {
-    from { opacity: 1; transform: scale(1); }
-    to { opacity: 0; transform: scale(1.05); }
+  @keyframes spinIn {
+    from { transform: rotate(90deg) scale(0.5); opacity: 0; }
+    to { transform: rotate(0deg) scale(1); opacity: 1; }
   }
 </style>

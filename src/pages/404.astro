@@ -11,14 +11,24 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="actions">
             <a href="/" class="btn-primary">Back to Home</a>
-            <a href="/work" class="link-secondary">View Work &rarr;</a>
         </div>
     </div>
 </Layout>
 
 <style>
+    body {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 1)), url('../assets/img/404.webp');
+        background-size: auto 100%;
+        background-position: top;
+        background-repeat: no-repeat;
+    }
+
     .error-container {
-        height: 80vh;
+        /* background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), url('../assets/img/web.webp');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat; */
+        height: 70vh;
         display: flex;
         flex-direction: column;
         align-items: center;

@@ -2,6 +2,7 @@
 // src/pages/photos.astro
 import Layout from '../layouts/Layout.astro';
 import photos from '../data/photos.json';
+import { slidePanRight, slidePanLeft, slidePanUpIntense } from '../scripts/transitions.js';
 
 ---
 
@@ -10,9 +11,9 @@ import photos from '../data/photos.json';
     <section class="page-header">
         <div class="container">
             <h1 transition:name="hero-name">Photo Gallery</h1>
-            <p transition:name="subtitle" class="text-muted">Moments I have captured in the moment using smartphones, drones and digital cameras.
+            <p  transition:animate={slidePanLeft} class="text-muted">Moments I have captured in the moment using smartphones, drones and digital cameras.
             </p>
-            <div class="header-socials">
+            <div transition:animate={slidePanRight} class="header-socials">
                 <span class="label">More on:</span>
                 <a href="https://www.instagram.com/chuck_copeland/" target="_blank" class="social-link">
                     <i class="fab fa-instagram"></i> Instagram
@@ -25,7 +26,7 @@ import photos from '../data/photos.json';
     </section>
 
     <section class="gallery-section">
-        <div class="container">
+        <div transition:animate={slidePanUpIntense} class="container">
             <div class="masonry-grid">
                 {photos.map((photo) => (
                 <div class="masonry-item reveal">

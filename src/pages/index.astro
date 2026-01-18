@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import videos from '../data/videos.json';
 import photos from '../data/photos.json';
 import ClientLogos from '../components/ClientLogos.astro';
+import { zoomIntense, slidePanRight, slidePanLeft } from '../scripts/transitions.js';
 
 // Select Top 3 Videos & Photos
 const featuredVideoIds = ['2024-showreel', 'crosspointe-15', 'farming-drone'];
@@ -11,237 +12,218 @@ const featuredVideos = videos.filter(p => featuredVideoIds.includes(p.id));
 
 const featuredPhotoIds = ['1', '4', '3']; // Update with actual IDs from photos.json
 const featuredPhotos = photos.filter(p => featuredPhotoIds.includes(String(p.id))).slice(0, 3);
-
-const anim = {
-  old: {
-    name: "zoomInEntry",
-    duration: "0.5s",
-    easing: "ease-in",
-    direction: "reverse",
-  },
-  new: {
-    name: "zoomInEntry",
-    duration: "0.5s",
-    easing: "ease-in-out",
-  },
-};
-
-const zoomInEntry = {
-  forwards: anim,
-  backwards: anim,
-};
-
-
 ---
 
 <Layout title="Chuck Copeland | Digital Creator & Video Editor">
 
 	<div class="index-page">
-	<section class="hero">
-		<video autoplay muted loop playsinline class="hero-video" poster="/assets/img/hero-fallback.webp">
-			<source src="/assets/video/hero.mp4" type="video/mp4" />
-		</video>
-		<div class="hero-overlay"></div>
-		<div class="hero-content container">
-			<h1 transition:name="hero-name">Chuck Copeland</h1>
-			<span class="text-accent">
-				<h2 transition:animate={zoomInEntry}>Digital Creator</h2>
-			</span>
-			<h3 transition:name="subtitle" class="hero-subtitle">Video Production &bull; Motion Graphics &bull; Web Development &bull; Photography <br />CatDad</h3>
-			<div class="hero-actions">
-				<a href="#video" class="btn-primary">Featured Media <i class="fas fa-chevron-down"></i></a>
+		<section class="hero">
+			<video autoplay muted loop playsinline class="hero-video" poster="/assets/img/hero-fallback.webp">
+				<source src="/assets/video/hero.mp4" type="video/mp4" />
+			</video>
+			<div class="hero-overlay"></div>
+			<div class="hero-content container">
+				<h1 transition:name="hero-name">Chuck Copeland</h1>
+				<span class="text-accent">
+					<h2 transition:animate={slidePanLeft}>Digital Creator</h2>
+				</span>
+				<h3 transition:animate={slidePanRight} class="hero-subtitle">Video Production &bull; Motion Graphics
+					&bull; Web Development &bull; Photography <br />CatDad</h3>
+				<div transition:animate={zoomIntense} class="hero-actions">
+					<a href="#video" class="btn-primary">Featured Media <i class="fas fa-chevron-down"></i></a>
+				</div>
 			</div>
-		</div>
-	</section>
+		</section>
 
-	<section class="trusted-section reveal">
-		<div class="container">
-			<div class="section-header">
-			<h2>Current and Past Clients</h2>
+		<section class="trusted-section reveal">
+			<div class="container">
+				<div class="section-header">
+					<h2>Current and Past Clients</h2>
+				</div>
+				<ClientLogos />
 			</div>
-			<ClientLogos />
-		</div>
-	</section>
+		</section>
 
-	<section id="video" class="featured-section reveal">
-		<div class="container">
-			<div class="section-header">
-				<h2>Featured Videos</h2>
-				<a href="/videos" class="view-all"><i class="fas fa-chevron-right"></i> View All Videos</a>
+		<section id="video" class="featured-section reveal">
+			<div class="container">
+				<div class="section-header">
+					<h2>Featured Videos</h2>
+					<a href="/videos" class="view-all"><i class="fas fa-chevron-right"></i> View All Videos</a>
+				</div>
+				<div class="media-grid">
+					{featuredVideos.map((videos) => (
+					<a href={`/video/${videos.id}`} class="media-card">
+
+						<div class="card-image skeleton">
+							<img src={`/${videos.thumbnail}`} alt={videos.title} loading="lazy" />
+							<div class="play-icon"><i class="fas fa-play"></i></div>
+						</div>
+
+						<div class="card-info">
+							<h3>{videos.title}</h3>
+							<p class="text-muted">{videos.category}</p>
+						</div>
+					</a>
+					))}
+				</div>
 			</div>
-			<div class="media-grid">
-    {featuredVideos.map((videos) => (
-    <a href={`/video/${videos.id}`} class="media-card">
-        
-        <div class="card-image skeleton">
-            <img src={`/${videos.thumbnail}`} alt={videos.title} loading="lazy" />
-            <div class="play-icon"><i class="fas fa-play"></i></div>
-        </div>
+		</section>
 
-        <div class="card-info">
-            <h3>{videos.title}</h3>
-            <p class="text-muted">{videos.category}</p>
-        </div>
-    </a>
-    ))}
-</div>
-		</div>
-	</section>
+		<section id="photo" class="featured-section reveal">
+			<div class="container">
+				<div class="section-header">
+					<h2>Featured Photos</h2>
+					<a href="/photos" class="view-all"><i class="fas fa-chevron-right"></i> View Gallery</a>
+				</div>
+				<div class="media-grid">
+					{featuredPhotos.map((photo) => (
+					<a href={photo.full} class="media-card lightbox-trigger"
+						data-caption={`<strong>${photo.title}</strong><br>${photo.description}<br><span
+							class="meta">${photo.camera} &bull; ${photo.date}</span>`}>
+						<div class="card-image skeleton">
+							<img src={photo.thumb} alt={photo.title} loading="lazy" />
+							<div class="photo-icon"><i class="fas fa-expand"></i></div>
+						</div>
 
-	<section id="photo" class="featured-section reveal">
-		<div class="container">
-			<div class="section-header">
-				<h2>Featured Photos</h2>
-				<a href="/photos" class="view-all"><i class="fas fa-chevron-right"></i> View Gallery</a>
+						<div class="card-info">
+							<h3>{photo.title}</h3>
+							<p class="text-muted">{photo.category}</p>
+						</div>
+					</a>
+					))}
+				</div>
 			</div>
-			<div class="media-grid">
-				{featuredPhotos.map((photo) => (
-				<a href={photo.full} class="media-card lightbox-trigger"
-					data-caption={`<strong>${photo.title}</strong><br>${photo.description}<br><span class="meta">${photo.camera} &bull; ${photo.date}</span>`}>
-					<div class="card-image skeleton">
-						<img src={photo.thumb} alt={photo.title} loading="lazy" />
-						<div class="photo-icon"><i class="fas fa-expand"></i></div>
+		</section>
+
+		<section class="services-teaser reveal">
+			<div class="container">
+				<div class="section-header">
+					<h2>Capabilities</h2>
+					<a href="/about" class="view-all"><i class="fas fa-chevron-right"></i> More About Me</a>
+				</div>
+				<div class="grid-3">
+					<div class="service-item service-1">
+						<i class="fas fa-film text-accent service-icon"></i>
+						<h3>Video Production</h3>
+						<p class="text-muted text-sm">End-to-end editing using Premiere Pro and Davinci Resolve Studio.
+							Also
+							proficient at color
+							grading, motion tracking, and
+							narrative storytelling that retains viewer attention.</p>
 					</div>
-
-					<div class="card-info">
-						<h3>{photo.title}</h3>
-						<p class="text-muted">{photo.category}</p>
+					<div class="service-item service-2">
+						<i class="fa-solid fa-pen-nib text-accent service-icon"></i>
+						<h3>Motion Design & Branding</h3>
+						<p class="text-muted text-sm">Bringing static assets to life. 2D/3D animation, text animation,
+							logo reveals, and
+							composite visual effects, including rotoscoping, using After Effects, Cinema4D, and Unreal
+							Engine.</p>
 					</div>
+					<div class="service-item service-3">
+						<i class="fa-solid fa-mobile-screen-button text-accent service-icon"></i>
+						<h3>Web & Digital Strategy</h3>
+						<p class="text-muted text-sm">Building the platform and the audience. Custom responsive websites
+							(HTML/CSS), SEO optimization, Email marketing and data-driven social
+							media campaigns.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+		<section class="cta-banner">
+			<div class="container text-center reveal">
+				<h2 class="mb-4">Let’s Make Something Awesome.</h2>
+				<p class="text-muted mb-8 max-w-2xl mx-auto">
+					You bring the vision, I’ll bring the engine room. Whether it's video production,
+					web dev, or digital strategy, let's build something that stands out.
+				</p>
+
+				<a href="#" class="btn-primary contact-trigger" data-user="chuck" data-domain="chuckcopeland.com">
+					Let's Work Together
 				</a>
-				))}
 			</div>
-		</div>
-	</section>
-
-	<section class="services-teaser reveal">
-		<div class="container">
-			<div class="section-header">
-				<h2>Capabilities</h2>
-				<a href="/about" class="view-all">More About Me</a>
-			</div>
-			<div class="grid-3">
-				<div class="service-item">
-					<i class="fas fa-film text-accent service-icon"></i>
-					<h3>Video Production</h3>
-					<p class="text-muted text-sm">End-to-end editing using Premiere Pro and Davinci Resolve Studio. Also
-						proficient at color
-						grading, motion tracking, and
-						narrative storytelling that retains viewer attention.</p>
-				</div>
-				<div class="service-item">
-					<i class="fa-solid fa-pen-nib text-accent service-icon"></i>
-					<h3>Motion Design & Branding</h3>
-					<p class="text-muted text-sm">Bringing static assets to life. 2D/3D animation, text animation, logo reveals, and
-						composite visual effects, including rotoscoping, using After Effects, Cinema4D, and Unreal Engine.</p>
-				</div>
-				<div class="service-item">
-					<i class="fa-solid fa-mobile-screen-button text-accent service-icon"></i>
-					<h3>Web & Digital Strategy</h3>
-					<p class="text-muted text-sm">Building the platform and the audience. Custom responsive websites
-						(HTML/CSS), SEO optimization, Email marketing and data-driven social
-						media campaigns.</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-
-	<section class="cta-banner">
-		<div class="container text-center reveal">
-			<h2 class="mb-4">Let’s Make Something Awesome.</h2>
-			<p class="text-muted mb-8 max-w-2xl mx-auto">
-				You bring the vision, I’ll bring the engine room. Whether it's video production, 
-				web dev, or digital strategy, let's build something that stands out.
-			</p>
-			
-			<a href="#" 
-			class="btn-primary contact-trigger" 
-			data-user="chuck" 
-			data-domain="chuckcopeland.com">
-			Let's Work Together
-			</a>
-		</div>
-	</section>
+		</section>
 	</div>
 
-<script>
-    let lightbox: any = null;
+	<script>
+		let lightbox: any = null;
 
-    function initLightbox() {
-        const gallerySelector = '.media-grid a.lightbox-trigger';
-        if (!document.querySelector(gallerySelector)) return;
+		function initLightbox() {
+			const gallerySelector = '.media-grid a.lightbox-trigger';
+			if (!document.querySelector(gallerySelector)) return;
 
-        if (lightbox) {
-            lightbox.destroy();
-            lightbox = null;
-        }
+			if (lightbox) {
+				lightbox.destroy();
+				lightbox = null;
+			}
 
-        lightbox = new SimpleLightbox(gallerySelector, {
-            captions: false,
-            captionSelector: 'self',
-            captionType: 'attr',
-            captionsData: 'data-caption',
-            captionPosition: 'bottom',
-            captionDelay: 0,
-            animationSpeed: 250,
-            fadeSpeed: 300,
-        });
+			lightbox = new SimpleLightbox(gallerySelector, {
+				captions: false,
+				captionSelector: 'self',
+				captionType: 'attr',
+				captionsData: 'data-caption',
+				captionPosition: 'bottom',
+				captionDelay: 0,
+				animationSpeed: 250,
+				fadeSpeed: 300,
+			});
 
-// Caption animation logic
-        const hideCaption = () => {
-            const caption = document.querySelector('.sl-caption');
-            // FIX: Check if it is an HTMLElement before accessing .style
-            if (caption instanceof HTMLElement) {
-                caption.style.opacity = '0';
-            }
-        };
+			// Caption animation logic
+			const hideCaption = () => {
+				const caption = document.querySelector('.sl-caption');
+				// FIX: Check if it is an HTMLElement before accessing .style
+				if (caption instanceof HTMLElement) {
+					caption.style.opacity = '0';
+				}
+			};
 
-        const showCaption = () => {
-            const caption = document.querySelector('.sl-caption');
-            // FIX: Check here as well
-            if (caption instanceof HTMLElement) {
-                setTimeout(() => {
-                    caption.style.transition = 'opacity 0.1s';
-                    caption.style.opacity = '1';
-                }, 50);
-            }
-        };
+			const showCaption = () => {
+				const caption = document.querySelector('.sl-caption');
+				// FIX: Check here as well
+				if (caption instanceof HTMLElement) {
+					setTimeout(() => {
+						caption.style.transition = 'opacity 0.1s';
+						caption.style.opacity = '1';
+					}, 50);
+				}
+			};
 
-        // Watermark Logic
-        const addWatermark = () => {
-            const imgContainer = document.querySelector('.sl-image');
-            if (imgContainer && !imgContainer.querySelector('.sl-watermark')) {
-                const img = document.createElement('img');
-                img.src = '/assets/img/watermark.png';
-                img.className = 'sl-watermark';
-                img.alt = 'Watermark';
-                imgContainer.appendChild(img);
-            }
-        };
+			// Watermark Logic
+			const addWatermark = () => {
+				const imgContainer = document.querySelector('.sl-image');
+				if (imgContainer && !imgContainer.querySelector('.sl-watermark')) {
+					const img = document.createElement('img');
+					img.src = '/assets/img/watermark.png';
+					img.className = 'sl-watermark';
+					img.alt = 'Watermark';
+					imgContainer.appendChild(img);
+				}
+			};
 
-        lightbox.on('open.simplelightbox', hideCaption);
-        lightbox.on('next.simplelightbox', hideCaption);
-        lightbox.on('prev.simplelightbox', hideCaption);
-        lightbox.on('opened.simplelightbox', showCaption);
-        lightbox.on('nextImageLoaded.simplelightbox', showCaption);
-        lightbox.on('prevImageLoaded.simplelightbox', showCaption);
+			lightbox.on('open.simplelightbox', hideCaption);
+			lightbox.on('next.simplelightbox', hideCaption);
+			lightbox.on('prev.simplelightbox', hideCaption);
+			lightbox.on('opened.simplelightbox', showCaption);
+			lightbox.on('nextImageLoaded.simplelightbox', showCaption);
+			lightbox.on('prevImageLoaded.simplelightbox', showCaption);
 
-        // Attach Watermark Events
-        lightbox.on('opened.simplelightbox', addWatermark);
-        lightbox.on('nextImageLoaded.simplelightbox', addWatermark);
-        lightbox.on('prevImageLoaded.simplelightbox', addWatermark);
-    }
+			// Attach Watermark Events
+			lightbox.on('opened.simplelightbox', addWatermark);
+			lightbox.on('nextImageLoaded.simplelightbox', addWatermark);
+			lightbox.on('prevImageLoaded.simplelightbox', addWatermark);
+		}
 
-    function destroyLightbox() {
-        if (lightbox) {
-            lightbox.destroy();
-            lightbox = null;
-        }
-    }
+		function destroyLightbox() {
+			if (lightbox) {
+				lightbox.destroy();
+				lightbox = null;
+			}
+		}
 
-    document.addEventListener('astro:page-load', initLightbox);
-    document.addEventListener('astro:before-swap', destroyLightbox);
-</script>
+		document.addEventListener('astro:page-load', initLightbox);
+		document.addEventListener('astro:before-swap', destroyLightbox);
+	</script>
 
 </Layout>
 
@@ -249,7 +231,7 @@ const zoomInEntry = {
 	.index-page {
 		cursor: default;
 	}
-	
+
 	/* HERO STYLES (Unchanged) */
 	.hero {
 		position: relative;
@@ -317,15 +299,34 @@ const zoomInEntry = {
 	}
 
 	.view-all {
-		color: var(--text-muted);
+		color: var(--accent);
 		font-family: var(--font-heading);
 		font-size: clamp(0.9rem, 1vw + 0.2rem, 1.1rem);
 		display: inline-block;
 		text-align: right;
+		padding: 0.2rem;
+		transition: color 0.3s ease, transform 0.3s ease;
 	}
 
 	.view-all:hover {
-		color: var(--accent);
+		color: var(--accent-aqua);
+		transform: scale(1.1);
+		border: solid 1px var(--accent-aqua);
+		border-radius: 2px;
+	}
+
+	@keyframes view-all {
+		0% {
+			transform: scale(1);
+		}
+
+		50% {
+			transform: scale(1.1);
+		}
+
+		0% {
+			transform: scale(1);
+		}
 	}
 
 	.media-grid {
@@ -431,6 +432,7 @@ const zoomInEntry = {
 	.trusted-section h2 {
 		padding: 0 0 1rem 0;
 	}
+
 	.services-teaser {
 		padding: 4rem 0;
 		background: var(--bg-card);
@@ -458,6 +460,24 @@ const zoomInEntry = {
 		text-align: center;
 	}
 
+	.service-1 {
+		background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)), url('../assets/img/timeline.webp');
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	.service-2 {
+		background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7)), url('../assets/img/cccom-bg.webp');
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	.service-3 {
+		background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)), url('../assets/img/web.webp');
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
 	.service-item:hover {
 		transform: translateY(-5px);
 		border-color: var(--accent);
@@ -476,10 +496,10 @@ const zoomInEntry = {
 	}
 
 	.service-item p {
-        font-size: 0.95rem;
-        color: #ccc;
-        margin-bottom: 1.5rem;
-        line-height: 1.6;
+		font-size: 0.95rem;
+		color: #ccc;
+		margin-bottom: 1.5rem;
+		line-height: 1.6;
 	}
 
 	.cta-banner {
@@ -516,25 +536,29 @@ const zoomInEntry = {
 		border-radius: 8px;
 		aspect-ratio: 16 / 9;
 	}
+
 	.swiper-slide img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 		transition: transform 0.4s ease;
 	}
+
 	.swiper-slide a:hover img {
 		transform: scale(1.05);
 	}
+
 	.photo-overlay {
 		position: absolute;
 		bottom: 0;
 		left: 0;
 		right: 0;
 		padding: 1rem;
-		background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+		background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
 		display: flex;
 		align-items: flex-end;
 	}
+
 	.category-badge {
 		background: var(--accent);
 		color: #fff;
@@ -544,22 +568,24 @@ const zoomInEntry = {
 		font-weight: bold;
 		text-transform: uppercase;
 	}
-	.swiper-button-next, .swiper-button-prev {
+
+	.swiper-button-next,
+	.swiper-button-prev {
 		color: var(--accent);
 		--swiper-navigation-size: 2rem;
 	}
 
-    /* Lightbox Watermark */
-    :global(.sl-watermark) {
-        position: absolute;
-        top: 3%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        height: 25px !important;
-        width: auto !important;
-        z-index: 10000;
-        opacity: 0.4;
-        pointer-events: none;
-        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    }
+	/* Lightbox Watermark */
+	:global(.sl-watermark) {
+		position: absolute;
+		top: 3%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		height: 25px !important;
+		width: auto !important;
+		z-index: 10000;
+		opacity: 0.4;
+		pointer-events: none;
+		text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+	}
 </style>

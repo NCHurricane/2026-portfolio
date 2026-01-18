@@ -1,8 +1,10 @@
 ---
 // src/pages/about.astro
 import Layout from '../layouts/Layout.astro';
-import ClientLogos from '../components/ClientLogos.astro';
 import brands from '../data/brands.json';
+import { slidePanUpIntense, slidePanDownIntense, slidePanRight, fadeTransition, zoomSubtle } from '../scripts/transitions.js';
+import { z } from 'astro:content';
+
 
 const skills = [
 {
@@ -30,8 +32,8 @@ desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for s
         <section class="bio-header container">
             <div class="bio-content">
                 <h1 transition:name="hero-name">Just A <span class="text-accent">CatDad</span> <br />Who Creates</h1>
-                <p transition:name="subtitle" class="lead">Cats, Clouds, Cars, and Code.</p>
-                <div class="bio-text">
+                <p transition:animate={slidePanRight} transition:name="subtitle" class="lead">Cats, Clouds, Cars, and Code.</p>
+                <div transition:animate={slidePanUpIntense} class="bio-text">
                     <p>I’m Chuck Copeland, a digital creator who combines creative vision with the reliability of
                         a seasoned leader.
                     </p>
@@ -53,7 +55,7 @@ desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for s
                                 href="https://nchurricats.com" target="_blank">The NCHurricats</a></span></p>
                 </div>
 
-                <div class="social-links"><a href="https://www.linkedin.com/in/chuckcopeland" target="_blank"
+                <div transition:animate={slidePanDownIntense} class="social-links"><a href="https://www.linkedin.com/in/chuckcopeland" target="_blank"
                         aria-label="LinkedIn">
                         <i class="fab fa-linkedin"></i>
                     </a>
@@ -84,8 +86,8 @@ desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for s
                 </div>
             </div>
 
-            <div class="bio-image">
-                <img src="/assets/img/about-photo.webp" alt="Chuck Copeland" loading="lazy" />
+            <div transition:animate={fadeTransition} class="bio-image">
+                <img transition:animate={slidePanRight} src="/assets/img/about-photo.webp" alt="Chuck Copeland" loading="lazy" />
             </div>
         </section>
 
@@ -94,7 +96,7 @@ desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for s
                 <h2>Production & Development</h2>
                 <div class="skills-grid">
 
-                    <div class="skill-card">
+                    <div class="skill-card skill-1">
                         <i class="fa-solid fa-film icon"></i>
                         <h3>Visual Creation</h3>
                         <p class="skill-info text-muted">My post-production workflow utilizes DaVinci Resolve Studio and the
@@ -104,7 +106,7 @@ desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for s
                             the story.</p>
                     </div>
 
-                    <div class="skill-card">
+                    <div class="skill-card skill-2">
                         <i class="fa-solid fa-code icon"></i>
                         <h3>Web Architecture</h3>
                         <p class="skill-info text-muted">With over 20 years of experience in HTML & CSS and a deep history with
@@ -113,7 +115,7 @@ desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for s
                             to ensure every line of code works and every element is correct before it goes live.</p>
                     </div>
 
-                    <div class="skill-card">
+                    <div class="skill-card skill-3">
                         <i class="fa-solid fa-computer icon"></i>
                         <h3>The Engine Room</h3>
                         <p class="skill-info text-muted">Creativity shouldn't have to wait on a loading bar. I built a custom,
@@ -270,8 +272,6 @@ desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for s
         background-color: var(--bg-main);
         border: 1px solid #222;
         border-radius: 12px;
-        border: 1px solid #222;
-        border-radius: 12px;
         padding: 2rem;
         display: flex;
         flex-direction: column;
@@ -279,6 +279,24 @@ desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for s
         text-align: center;
         transition: transform 0.3s ease, border-color 0.3s ease;
     }
+
+    .skill-1 {
+		background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)), url('../assets/img/timeline.webp');
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	.skill-2 {
+		background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('../assets/img/html.webp');
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	.skill-3 {
+		background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9)), url('../assets/img/computer.webp');
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
 
     .skill-card:hover {
         transform: translateY(-5px);
@@ -307,6 +325,16 @@ desc: "HTML5, CSS3, and Modern Frameworks. Building fast, responsive sites for s
 /* BRANDS SECTION */
     .brands-section {
         padding: 4rem 0;
+   		background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)), url('../assets/img/portfolio-bg.png');
+        background-size: cover;
+        background-position: bottom;
+        background-repeat: no-repeat;
+    }
+
+    @media (max-width: 600px) {
+        .brands-section {
+            background-image: none;
+        }
     }
 
     .brands-grid {

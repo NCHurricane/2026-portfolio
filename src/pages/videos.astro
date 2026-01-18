@@ -2,6 +2,8 @@
 // src/pages/work.astro
 import Layout from '../layouts/Layout.astro';
 import projects from '../data/videos.json';
+import { slidePanRight, slidePanLeft, slidePanUpIntense } from '../scripts/transitions.js';
+
 
 // Sort projects by date (newest first)
 const sortedProjects = projects.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -12,10 +14,10 @@ const sortedProjects = projects.sort((a, b) => new Date(b.date).getTime() - new 
     <section class="page-header">
         <div class="container">
             <h1 transition:name="hero-name">Video Gallery</h1>
-            <p transition:name="subtitle" class="text-muted">A collection of video projects I have created over the years for myself and clients.
+            <p  transition:animate={slidePanLeft} class="text-muted">A collection of video projects I have created over the years for myself and clients.
             </p>
 
-            <div class="header-socials">
+            <div transition:animate={slidePanRight} class="header-socials">
                 <span class="label">More on:</span>
                 <a href="https://www.youtube.com/@chuckcopeland" target="_blank" class="social-link">
                     <i class="fab fa-youtube"></i> YouTube
@@ -28,7 +30,7 @@ const sortedProjects = projects.sort((a, b) => new Date(b.date).getTime() - new 
     </section>
 
     <section class="gallery-section">
-        <div class="container">
+        <div transition:animate={slidePanUpIntense} class="container">
             <div class="projects-grid">
                 {sortedProjects.map((project) => (
                 <a href={`/video/${project.id}`} class="project-card">

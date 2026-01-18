@@ -11,6 +11,27 @@ const featuredVideos = videos.filter(p => featuredVideoIds.includes(p.id));
 
 const featuredPhotoIds = ['1', '4', '3']; // Update with actual IDs from photos.json
 const featuredPhotos = photos.filter(p => featuredPhotoIds.includes(String(p.id))).slice(0, 3);
+
+const anim = {
+  old: {
+    name: "zoomInEntry",
+    duration: "0.5s",
+    easing: "ease-in",
+    direction: "reverse",
+  },
+  new: {
+    name: "zoomInEntry",
+    duration: "0.5s",
+    easing: "ease-in-out",
+  },
+};
+
+const zoomInEntry = {
+  forwards: anim,
+  backwards: anim,
+};
+
+
 ---
 
 <Layout title="Chuck Copeland | Digital Creator & Video Editor">
@@ -24,9 +45,9 @@ const featuredPhotos = photos.filter(p => featuredPhotoIds.includes(String(p.id)
 		<div class="hero-content container">
 			<h1 transition:name="hero-name">Chuck Copeland</h1>
 			<span class="text-accent">
-				<h2>Digital Creator</h2>
+				<h2 transition:animate={zoomInEntry}>Digital Creator</h2>
 			</span>
-			<h3 class="hero-subtitle">Video Production &bull; Motion Graphics &bull; Web Development &bull; Photography <br />CatDad</h3>
+			<h3 transition:name="subtitle" class="hero-subtitle">Video Production &bull; Motion Graphics &bull; Web Development &bull; Photography <br />CatDad</h3>
 			<div class="hero-actions">
 				<a href="#video" class="btn-primary">Featured Media <i class="fas fa-chevron-down"></i></a>
 			</div>

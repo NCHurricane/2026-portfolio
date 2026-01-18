@@ -40,7 +40,7 @@ const isYoutube = project.videoUrl.includes('youtube');
 
         <div class="project-details">
             <div class="info-header">
-                <h1>{project.title}</h1>
+                <h1 transition:name="hero-name">{project.title}</h1>
                 <div class="tags">
                     <span class="badge">{project.category}</span>
                     <span class="date text-muted">{project.date}</span>

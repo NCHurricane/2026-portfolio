@@ -134,3 +134,71 @@ const siteUrl = "https://chuckcopeland.com";
     </body>
 
 </html>
+
+<style is:global>
+  /* === ANIMATION KEYFRAMES === */
+
+  /* Vertical Slide */
+  @keyframes slideUpOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-20px); }
+  }
+  @keyframes slideUpIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Horizontal Slide */
+  @keyframes slideRightOut {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(40px); }
+  }
+  @keyframes slideLeftIn {
+    from { opacity: 0; transform: translateX(-40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* NEW: Slide Down */
+  @keyframes slideDownOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(20px); }
+  }
+  @keyframes slideDownIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* NEW: Slide Left (Standard) */
+  @keyframes slideLeftOut {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(-40px); }
+  }
+  @keyframes slideRightIn {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* === ZOOM IN (Pop) === */
+  /* Entering: Grows from 90% to 100% */
+  @keyframes zoomInEntry {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  /* Exiting: Shrinks from 100% to 90% */
+  @keyframes zoomOutExit {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.9); }
+  }
+
+  /* === ZOOM OUT (Cinematic) === */
+  /* Entering: Shrinks from 105% to 100% */
+  @keyframes zoomOutEntry {
+    from { opacity: 0; transform: scale(1.05); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  /* Exiting: Grows from 100% to 105% */
+  @keyframes zoomInExit {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(1.05); }
+  }
+</style>

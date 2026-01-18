@@ -17,15 +17,16 @@ import '@fontsource-variable/georama';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 interface Props {
-title: string;
-description?: string;
-image?: string;
+	title: string;
+	description?: string;
+	image?: string;
 }
 
 const {
-title,
-description = "Chuck Copeland - Multimedia Artist & Video Editor",
-image = "/assets/img/og-image.png"
+	title,
+    // Updated default description
+	description = "Freelance multimedia artist in North Carolina specializing in video editing, motion graphics, photography, and web design. 20+ years creating content for clients and social media.",
+	image = "/assets/img/og-image.png"
 } = Astro.props;
 
 const siteUrl = "https://chuckcopeland.com";
@@ -34,26 +35,73 @@ const siteUrl = "https://chuckcopeland.com";
 <!doctype html>
 <html lang="en">
 
-    <head>
-        <ClientRouter />
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-        <meta name="generator" content={Astro.generator} />
+<head>
+	<ClientRouter />
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+	<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+	<meta name="generator" content={Astro.generator} />
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.css"
-            rel="stylesheet">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swiper/11.0.5/swiper-bundle.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.css" rel="stylesheet">
 
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={siteUrl} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={new URL(image, siteUrl)} />
-    </head>
+	<title>{title}</title>
+	<meta name="description" content={description} />
+
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={siteUrl} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:image" content={new URL(image, siteUrl)} />
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+
+	<meta property="twitter:card" content="summary_large_image">
+	<meta property="twitter:url" content={siteUrl}>
+	<meta property="twitter:title" content={title}>
+	<meta property="twitter:description" content={description}>
+	<meta property="twitter:image" content={new URL(image, siteUrl)}>
+
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "Person",
+			"name": "Chuck Copeland",
+			"jobTitle": "Multimedia Content Specialist",
+			"description": "Freelance multimedia artist with 20+ years of experience specializing in video editing, motion graphics, photography, and web design.",
+			"url": "https://chuckcopeland.com",
+			"image": "https://chuckcopeland.com/assets/img/og-image.png",
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Winterville",
+				"addressRegion": "NC",
+				"addressCountry": "US"
+			},
+			"worksFor": {
+				"@type": "Organization",
+				"name": "Freelance"
+			},
+			"knowsAbout": [
+				"Video Editing",
+				"Motion Graphics",
+				"Photography",
+				"Web Design",
+				"Color Grading",
+				"Content Creation"
+			],
+			"sameAs": [
+				"https://www.linkedin.com/in/chuckcopeland",
+				"https://bsky.app/profile/chuckcopeland.com",
+				"https://www.youtube.com/@chuckcopeland",
+				"https://www.instagram.com/chuck_copeland/",
+				"https://www.tiktok.com/@chuck_copeland",
+				"https://www.threads.net/@chuck_copeland",
+				"https://www.facebook.com/chuckcopelandcom/",
+				"https://mastodon.social/@chuckcopeland"
+			]
+		}
+	</script>
+</head>
 
     <body>
 
@@ -80,7 +128,6 @@ const siteUrl = "https://chuckcopeland.com";
             });
         </script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/swiper/11.0.5/swiper-bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.js"
             is:inline></script>
 

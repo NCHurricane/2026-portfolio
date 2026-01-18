@@ -1,13 +1,13 @@
 ---
 // src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
-import projects from '../data/videos.json';
+import videos from '../data/videos.json';
 import photos from '../data/photos.json';
 import ClientLogos from '../components/ClientLogos.astro';
 
 // Select Top 3 Videos & Photos
-const featuredIds = ['2024-showreel', 'crosspointe-15', 'farming-drone'];
-const featuredProjects = projects.filter(p => featuredIds.includes(p.id));
+const featuredVideoIds = ['2024-showreel', 'crosspointe-15', 'farming-drone'];
+const featuredVideos = videos.filter(p => featuredVideoIds.includes(p.id));
 
 const featuredPhotoIds = ['1', '4', '3']; // Update with actual IDs from photos.json
 const featuredPhotos = photos.filter(p => featuredPhotoIds.includes(String(p.id))).slice(0, 3);
@@ -49,17 +49,17 @@ const featuredPhotos = photos.filter(p => featuredPhotoIds.includes(String(p.id)
 				<a href="/videos" class="view-all"><i class="fas fa-chevron-right"></i> View All Videos</a>
 			</div>
 			<div class="media-grid">
-    {featuredProjects.map((project) => (
-    <a href={`/video/${project.id}`} class="media-card">
+    {featuredVideos.map((videos) => (
+    <a href={`/video/${videos.id}`} class="media-card">
         
         <div class="card-image skeleton">
-            <img src={`/${project.thumbnail}`} alt={project.title} loading="lazy" />
+            <img src={`/${videos.thumbnail}`} alt={videos.title} loading="lazy" />
             <div class="play-icon"><i class="fas fa-play"></i></div>
         </div>
 
         <div class="card-info">
-            <h3>{project.title}</h3>
-            <p class="text-muted">{project.category}</p>
+            <h3>{videos.title}</h3>
+            <p class="text-muted">{videos.category}</p>
         </div>
     </a>
     ))}
